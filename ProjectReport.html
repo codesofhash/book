@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Report: CSharpFlexGrid Booking Order Processor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; border-bottom: 2px solid #ecf0f1; padding-bottom: 8px; margin-top: 30px; }
+        h3 { color: #7f8c8d; margin-top: 20px; }
+        h4 { color: #95a5a6; margin-top: 15px; }
+        h5 { color: #a0a0a0; margin-top: 12px; font-size: 1em; }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #3498db;
+            font-size: 0.85em;
+        }
+        code {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .inline-code {
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85em;
+        }
+        .model { background: #e8f4f8; padding: 15px; border-radius: 5px; margin: 10px 0; }
+        .method { background: #fff3cd; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #ffc107; }
+        .logic { background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0; border-left: 3px solid #6c757d; }
+        .success { color: #28a745; font-weight: bold; }
+        .warning { color: #ffc107; font-weight: bold; }
+        .info { background: #d1ecf1; padding: 10px; border-radius: 5px; border-left: 4px solid #17a2b8; margin: 10px 0; }
+        .new-feature { background: #d4edda; padding: 10px; border-radius: 5px; border-left: 4px solid #28a745; margin: 10px 0; }
+        .file-section { background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 15px 0; border: 1px solid #dee2e6; }
+        .class-section { background: #fff; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #6c757d; }
+        .method-signature { background: #2c3e50; color: #3498db; padding: 8px 12px; border-radius: 3px; font-family: monospace; margin: 5px 0; display: block; }
+        .param-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.9em; }
+        .param-table th, .param-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .param-table th { background: #6c757d; color: white; }
+        table { border-collapse: collapse; width: 100%; margin: 15px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #3498db; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        .toc { background: #ecf0f1; padding: 20px; border-radius: 5px; margin: 20px 0; }
+        .toc a { color: #2980b9; text-decoration: none; display: block; padding: 5px 0; }
+        .toc a:hover { color: #3498db; text-decoration: underline; }
+        .toc-sub { margin-left: 20px; font-size: 0.9em; }
+        .flow { background: #e8f5e9; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #4caf50; }
+        .db-query { background: #1a1a2e; color: #0f0; padding: 10px; border-radius: 5px; font-family: monospace; margin: 10px 0; }
+        .field-list { background: #fafafa; padding: 10px 15px; border-radius: 5px; margin: 10px 0; }
+        .enum-values { background: #e3f2fd; padding: 10px; border-radius: 5px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CSharpFlexGrid Booking Order Processor</h1>
+        <p><strong>Report Date:</strong> Tuesday, 28 January 2026</p>
+        <p><strong>Project Directory:</strong> <code>C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid</code></p>
+        <p><strong>Status:</strong> <span class="success">PRODUCTION READY</span> - Full Booking Management System with Database Integration</p>
+        <p><strong>Version:</strong> 5.1 - AutoComplete Control with Show-on-Focus Feature</p>
+
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <a href="#overview">1. Project Overview</a>
+            <a href="#architecture">2. System Architecture</a>
+            <a href="#config">3. Configuration Files</a>
+            <div class="toc-sub">
+                <a href="#config-csproj">3.1 CSharpFlexGrid.csproj</a>
+                <a href="#config-env">3.2 .env Configuration</a>
+                <a href="#config-settings">3.3 settings.json</a>
+            </div>
+            <a href="#datamodels">4. Data Models (BookingOrderModels.cs)</a>
+            <div class="toc-sub">
+                <a href="#model-campaign">4.1 CampaignPeriod Class</a>
+                <a href="#model-spot">4.2 Spot Class</a>
+                <a href="#model-booking">4.3 BookingOrder Class</a>
+            </div>
+            <a href="#utilities">5. Utility Classes</a>
+            <div class="toc-sub">
+                <a href="#util-reader">5.1 BookingOrderReader.cs</a>
+                <a href="#util-db">5.2 DatabaseHelper.cs</a>
+                <a href="#util-grid">5.3 CustomDataGridView.cs</a>
+                <a href="#util-combo">5.4 EditableAutoCompleteComboBox.cs</a>
+                <a href="#util-autocomplete">5.5 AutoComplete.cs</a>
+            </div>
+            <a href="#forms">6. Windows Forms</a>
+            <div class="toc-sub">
+                <a href="#form-program">6.1 Program.cs (Entry Point)</a>
+                <a href="#form-splash">6.2 SplashScreen.cs</a>
+                <a href="#form-mainmenu">6.3 MainMenuForm.cs</a>
+                <a href="#form-booking">6.4 BookingManagerForm.cs</a>
+                <a href="#form-calendar">6.5 CalendarGridForm.cs</a>
+                <a href="#form-editor">6.6 DataEditorForm.cs</a>
+                <a href="#form-main">6.7 MainForm.cs</a>
+            </div>
+            <a href="#database">7. Database Integration</a>
+            <div class="toc-sub">
+                <a href="#db-tables">7.1 Database Tables</a>
+                <a href="#db-queries">7.2 SQL Queries Used</a>
+            </div>
+            <a href="#features">8. Feature Details</a>
+            <div class="toc-sub">
+                <a href="#feature-multimonth">8.1 Multi-Month Campaign Support</a>
+                <a href="#feature-dateshift">8.2 Smart Date Shifting</a>
+                <a href="#feature-autofill">8.3 Auto-fill from Database</a>
+                <a href="#feature-pricing">8.4 Pricing Calculation</a>
+                <a href="#feature-calculate">8.5 Calculate Button</a>
+            </div>
+            <a href="#formats">9. Supported Excel Formats</a>
+            <a href="#keyboard">10. Keyboard Shortcuts</a>
+            <a href="#appflow">11. Application Flow</a>
+            <a href="#filestructure">12. Complete File Structure</a>
+        </div>
+
+        <!-- SECTION 1: PROJECT OVERVIEW -->
+        <section id="overview">
+            <h2>1. Project Overview</h2>
+            <p>CSharpFlexGrid is a comprehensive C# Windows Forms application designed to manage television advertising booking orders. It combines Excel file parsing, JSON data management, MySQL database integration, and an intuitive calendar-style grid interface with advanced editing capabilities.</p>
+
+            <h3>Core Capabilities</h3>
+            <ul>
+                <li><strong>Multi-Format Support:</strong> Handles 4 
+                Excel formats (Al Mulla, Royal Pharmacies, Direct-NCCAL, Zain)</li>
+                <li><strong>Multi-Month Campaigns:</strong> Grid supports date ranges spanning multiple months</li>
+                <li><strong>Smart Date Shifting:</strong> Changing start date shifts all spots while maintaining relative positions</li>
+                <li><strong>Database Integration:</strong> MySQL connectivity for programme lookups and rate cards</li>
+                <li><strong>Grid Mode Options:</strong> Campaign Dates mode or Specific Date mode with OID lookups</li>
+                <li><strong>Auto-fill Features:</strong> F/P ratio from database, Ratio from rate_card based on duration</li>
+                <li><strong>Booking Calculation:</strong> Group bookings by duration and period for rate calculation</li>
+                <li><strong>Excel-like Editing:</strong> Copy/paste, add/delete rows, multi-cell selection, keyboard shortcuts</li>
+            </ul>
+
+            <h3>Technology Stack</h3>
+            <table>
+                <tr><th>Component</th><th>Technology</th><th>Version</th><th>Purpose</th></tr>
+                <tr><td>Framework</td><td>.NET</td><td>9.0</td><td>Runtime environment</td></tr>
+                <tr><td>UI Framework</td><td>Windows Forms</td><td>9.0</td><td>Desktop UI components</td></tr>
+                <tr><td>Excel Reader</td><td>ExcelDataReader</td><td>3.6.0</td><td>Parse .xlsx/.xls files</td></tr>
+                <tr><td>Excel DataSet</td><td>ExcelDataReader.DataSet</td><td>3.6.0</td><td>DataSet integration for Excel</td></tr>
+                <tr><td>JSON Serialization</td><td>Newtonsoft.Json</td><td>13.0.3</td><td>JSON parsing and serialization</td></tr>
+                <tr><td>Environment Config</td><td>DotNetEnv</td><td>3.1.1</td><td>Load .env configuration files</td></tr>
+                <tr><td>Database</td><td>MySqlConnector</td><td>2.3.7</td><td>MySQL database connectivity</td></tr>
+                <tr><td>Language</td><td>C#</td><td>12.0</td><td>Primary programming language</td></tr>
+            </table>
+        </section>
+
+        <!-- SECTION 2: SYSTEM ARCHITECTURE -->
+        <section id="architecture">
+            <h2>2. System Architecture</h2>
+
+            <h3>Component Hierarchy</h3>
+            <pre><code>CSharpFlexGrid/
+├── Program.cs                          # Application entry point
+├── SplashScreen.cs                     # 3-second splash screen
+├── MainMenuForm.cs                     # Main navigation menu
+├── BookingManagerForm.cs               # Primary booking interface (~2500 lines)
+├── CalendarGridForm.cs                 # Calendar-based spot view
+├── DataEditorForm.cs                   # Row-based spot editor
+├── MainForm.cs                         # Legacy demo form
+│
+├── Data Models/
+│   └── BookingOrderModels.cs           # BookingOrder, Spot, CampaignPeriod
+│
+├── Utilities/
+│   ├── BookingOrderReader.cs           # Excel parser (~500 lines)
+│   ├── DatabaseHelper.cs               # MySQL operations (~120 lines)
+│   ├── CustomDataGridView.cs           # Extended DataGridView
+│   ├── EditableAutoCompleteComboBox.cs # Custom ComboBox control
+│   └── AutoComplete.cs                 # Autocomplete TextBox control (~310 lines)
+│
+├── Configuration/
+│   ├── .env                            # Database credentials, paths
+│   └── settings.json                   # Application settings
+│
+└── Output/
+    └── ProcessedOrders/                # JSON output directory</code></pre>
+
+            <h3>Class Dependency Diagram</h3>
+            <pre><code>Program.cs
+    └─► SplashScreen
+            └─► MainMenuForm
+                    ├─► BookingManagerForm
+                    │       ├── uses ► BookingOrderReader
+                    │       ├── uses ► DatabaseHelper
+                    │       ├── uses ► CustomDataGridView
+                    │       ├── uses ► EditableAutoCompleteComboBox
+                    │       ├── uses ► AutoComplete
+                    │       ├── uses ► BookingOrderModels
+                    │       └── implements ► IMessageFilter
+                    │
+                    ├─► CalendarGridForm
+                    │       ├── uses ► BookingOrderModels
+                    │       └── uses ► CustomDataGridView
+                    │
+                    └─► DataEditorForm
+                            └── uses ► BookingOrderModels</code></pre>
+        </section>
+
+        <!-- SECTION 3: CONFIGURATION FILES -->
+        <section id="config">
+            <h2>3. Configuration Files</h2>
+
+            <div id="config-csproj" class="file-section">
+                <h3>3.1 CSharpFlexGrid.csproj</h3>
+                <p><strong>Location:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\CSharpFlexGrid.csproj</code></p>
+                <p><strong>Purpose:</strong> MSBuild project file defining build configuration and dependencies</p>
+
+                <h4>Project Properties</h4>
+                <table>
+                    <tr><th>Property</th><th>Value</th><th>Description</th></tr>
+                    <tr><td>OutputType</td><td>WinExe</td><td>Windows executable (no console window)</td></tr>
+                    <tr><td>TargetFramework</td><td>net9.0-windows</td><td>.NET 9.0 with Windows support</td></tr>
+                    <tr><td>UseWindowsForms</td><td>true</td><td>Enable Windows Forms framework</td></tr>
+                    <tr><td>ImplicitUsings</td><td>enable</td><td>Auto-import common namespaces</td></tr>
+                    <tr><td>Nullable</td><td>disable</td><td>Nullable reference types disabled</td></tr>
+                </table>
+
+                <h4>NuGet Dependencies</h4>
+                <pre><code>&lt;ItemGroup&gt;
+  &lt;PackageReference Include="DotNetEnv" Version="3.1.1" /&gt;
+  &lt;PackageReference Include="ExcelDataReader" Version="3.6.0" /&gt;
+  &lt;PackageReference Include="ExcelDataReader.DataSet" Version="3.6.0" /&gt;
+  &lt;PackageReference Include="MySqlConnector" Version="2.3.7" /&gt;
+  &lt;PackageReference Include="Newtonsoft.Json" Version="13.0.3" /&gt;
+&lt;/ItemGroup&gt;</code></pre>
+            </div>
+
+            <div id="config-env" class="file-section">
+                <h3>3.2 .env Configuration</h3>
+                <p><strong>Location:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\.env</code></p>
+                <p><strong>Purpose:</strong> Environment variables for database and path configuration</p>
+
+                <h4>Variables</h4>
+                <table>
+                    <tr><th>Variable</th><th>Value</th><th>Description</th></tr>
+                    <tr><td>JSON_OUTPUT_PATH</td><td>C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\ProcessedOrders</td><td>Directory for processed JSON files</td></tr>
+                    <tr><td>DB_HOST</td><td>localhost</td><td>MySQL server hostname</td></tr>
+                    <tr><td>DB_USER</td><td>root</td><td>MySQL username</td></tr>
+                    <tr><td>DB_PASSWORD</td><td>Hash3017#</td><td>MySQL password</td></tr>
+                    <tr><td>DB_NAME</td><td>u333577897_dbofhash</td><td>MySQL database name</td></tr>
+                    <tr><td>DB_PORT</td><td>3306</td><td>MySQL port number</td></tr>
+                </table>
+
+                <h4>File Contents</h4>
+                <pre><code>JSON_OUTPUT_PATH=C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\ProcessedOrders
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=Hash3017#
+DB_NAME=u333577897_dbofhash
+DB_PORT=3306</code></pre>
+            </div>
+
+            <div id="config-settings" class="file-section">
+                <h3>3.3 settings.json</h3>
+                <p><strong>Location:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\settings.json</code></p>
+                <p><strong>Purpose:</strong> Application behavior settings</p>
+
+                <h4>Settings</h4>
+                <table>
+                    <tr><th>Setting</th><th>Type</th><th>Default</th><th>Description</th></tr>
+                    <tr><td>DefaultGridMode</td><td>string</td><td>"CampaignDates"</td><td>Initial grid mode: "CampaignDates" or "SpecificDate"</td></tr>
+                    <tr><td>DealSearchDays</td><td>int</td><td>15</td><td>Number of days to search for existing deals</td></tr>
+                </table>
+
+                <h4>File Contents</h4>
+                <pre><code>{
+  "DefaultGridMode": "CampaignDates",
+  "DealSearchDays": 15
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SECTION 4: DATA MODELS -->
+        <section id="datamodels">
+            <h2>4. Data Models (BookingOrderModels.cs)</h2>
+            <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\BookingOrderModels.cs</code></p>
+            <p><strong>Purpose:</strong> Define data structures for booking order information with JSON serialization attributes</p>
+
+            <div id="model-campaign" class="class-section">
+                <h3>4.1 CampaignPeriod Class</h3>
+                <p>Represents the date range of an advertising campaign.</p>
+
+                <h4>Properties</h4>
+                <table class="param-table">
+                    <tr><th>Property</th><th>Type</th><th>JSON Key</th><th>Description</th></tr>
+                    <tr><td>StartDate</td><td>string</td><td>start_date</td><td>Campaign start date (format: yyyy-MM-dd)</td></tr>
+                    <tr><td>EndDate</td><td>string</td><td>end_date</td><td>Campaign end date (format: yyyy-MM-dd)</td></tr>
+                </table>
+
+                <h4>Code</h4>
+                <pre><code>public class CampaignPeriod
+{
+    [JsonProperty("start_date")]
+    public string StartDate { get; set; }
+
+    [JsonProperty("end_date")]
+    public string EndDate { get; set; }
+}</code></pre>
+            </div>
+
+            <div id="model-spot" class="class-section">
+                <h3>4.2 Spot Class</h3>
+                <p>Represents an individual advertising spot with programme, timing, and schedule information.</p>
+
+                <h4>Properties</h4>
+                <table class="param-table">
+                    <tr><th>Property</th><th>Type</th><th>JSON Key</th><th>Description</th></tr>
+                    <tr><td>ProgrammeName</td><td>string</td><td>programme_name</td><td>TV programme/show name</td></tr>
+                    <tr><td>ProgrammeStartTime</td><td>string</td><td>programme_start_time</td><td>Broadcast time (format: HH:mm)</td></tr>
+                    <tr><td>Duration</td><td>string</td><td>duration</td><td>Spot duration in seconds</td></tr>
+                    <tr><td>Dates</td><td>List&lt;string&gt;</td><td>dates</td><td>List of broadcast dates (format: yyyy-MM-dd)</td></tr>
+                    <tr><td>TotalSpots</td><td>int</td><td>total_spots</td><td>Total number of spots for this programme</td></tr>
+                </table>
+
+                <h4>Code</h4>
+                <pre><code>public class Spot
+{
+    [JsonProperty("programme_name")]
+    public string ProgrammeName { get; set; }
+
+    [JsonProperty("programme_start_time")]
+    public string ProgrammeStartTime { get; set; }
+
+    [JsonProperty("duration")]
+    public string Duration { get; set; }
+
+    [JsonProperty("dates")]
+    public List&lt;string&gt; Dates { get; set; }
+
+    [JsonProperty("total_spots")]
+    public int TotalSpots { get; set; }
+}</code></pre>
+            </div>
+
+            <div id="model-booking" class="class-section">
+                <h3>4.3 BookingOrder Class</h3>
+                <p>Main container for all booking order information including metadata and spots collection.</p>
+
+                <h4>Properties</h4>
+                <table class="param-table">
+                    <tr><th>Property</th><th>Type</th><th>JSON Key</th><th>Description</th></tr>
+                    <tr><td>Agency</td><td>string</td><td>agency</td><td>Advertising agency name</td></tr>
+                    <tr><td>Advertiser</td><td>string</td><td>advertiser</td><td>Advertiser/brand name</td></tr>
+                    <tr><td>Product</td><td>string</td><td>product</td><td>Product being advertised</td></tr>
+                    <tr><td>CompanyName</td><td>string</td><td>company_name</td><td>Company name</td></tr>
+                    <tr><td>CampaignPeriod</td><td>CampaignPeriod</td><td>campaign_period</td><td>Campaign date range object</td></tr>
+                    <tr><td>GrossCost</td><td>decimal</td><td>gross_cost</td><td>Total campaign cost</td></tr>
+                    <tr><td>TotalSpots</td><td>int</td><td>total_spots</td><td>Total number of advertising spots</td></tr>
+                    <tr><td>Spots</td><td>List&lt;Spot&gt;</td><td>spots</td><td>Collection of individual spot objects</td></tr>
+                </table>
+
+                <h4>Code</h4>
+                <pre><code>public class BookingOrder
+{
+    [JsonProperty("agency")]
+    public string Agency { get; set; }
+
+    [JsonProperty("advertiser")]
+    public string Advertiser { get; set; }
+
+    [JsonProperty("product")]
+    public string Product { get; set; }
+
+    [JsonProperty("company_name")]
+    public string CompanyName { get; set; }
+
+    [JsonProperty("campaign_period")]
+    public CampaignPeriod CampaignPeriod { get; set; }
+
+    [JsonProperty("gross_cost")]
+    public decimal GrossCost { get; set; }
+
+    [JsonProperty("total_spots")]
+    public int TotalSpots { get; set; }
+
+    [JsonProperty("spots")]
+    public List&lt;Spot&gt; Spots { get; set; }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SECTION 5: UTILITY CLASSES -->
+        <section id="utilities">
+            <h2>5. Utility Classes</h2>
+
+            <div id="util-reader" class="file-section">
+                <h3>5.1 BookingOrderReader.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\BookingOrderReader.cs</code></p>
+                <p><strong>Lines:</strong> ~500</p>
+                <p><strong>Purpose:</strong> Parse Excel booking order files from multiple formats and convert to JSON</p>
+
+                <h4>Class: BookingOrderReader</h4>
+
+                <div class="method">
+                    <h5>Public Methods</h5>
+
+                    <code class="method-signature">public string ProcessBookingOrder(string filePath)</code>
+                    <table class="param-table">
+                        <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>filePath</td><td>string</td><td>Full path to the Excel file (.xlsx or .xls)</td></tr>
+                        <tr><th colspan="3">Returns</th></tr>
+                        <tr><td colspan="3">JSON string of BookingOrder object, or JSON with "error" and "stackTrace" on failure</td></tr>
+                    </table>
+                    <p><strong>Process:</strong></p>
+                    <ol>
+                        <li>Opens Excel file with ExcelDataReader</li>
+                        <li>Converts to DataSet</li>
+                        <li>Finds the booking order sheet (largest data sheet)</li>
+                        <li>Detects format (Al Mulla or Direct-NCCAL)</li>
+                        <li>Parses metadata and schedule</li>
+                        <li>Returns serialized JSON</li>
+                    </ol>
+                </div>
+
+                <div class="method">
+                    <h5>Private Methods</h5>
+
+                    <code class="method-signature">private DataTable FindBookingOrderSheet(DataSet dataSet)</code>
+                    <p>Identifies the main booking data sheet from all sheets in workbook. Selects sheet with largest data (rows x columns). Minimum requirement: 10 rows and 10 columns.</p>
+
+                    <code class="method-signature">private void ParseAlMulla(DataTable sheet, BookingOrder bookingOrder)</code>
+                    <p>Parses "Al Mulla" format Excel files. Extracts company name, advertiser, product, cost, total spots. Calls ParseAlMullaSchedule for calendar data.</p>
+
+                    <code class="method-signature">private void ParseDirectNCCAL(DataTable sheet, BookingOrder bookingOrder)</code>
+                    <p>Parses "Direct-NCCAL" format Excel files. Extracts agency, advertiser, product, cost, total spots. Calls ParseDirectNCCALSchedule for calendar data.</p>
+
+                    <code class="method-signature">private void ParseAlMullaSchedule(DataTable sheet, BookingOrder bookingOrder)</code>
+                    <p><strong>Logic:</strong></p>
+                    <ul>
+                        <li>Finds header row containing "PROGRAMS" or similar keywords</li>
+                        <li>Identifies calendar row above header</li>
+                        <li>Locates date columns and duration columns</li>
+                        <li>Parses spot counts for each date</li>
+                        <li>Creates Spot objects with date lists</li>
+                    </ul>
+
+                    <code class="method-signature">private void ParseDirectNCCALSchedule(DataTable sheet, BookingOrder bookingOrder)</code>
+                    <p><strong>Logic:</strong></p>
+                    <ul>
+                        <li>Finds "Programs Name" header row</li>
+                        <li>Identifies "Time (KWT)", "Price in US $", "Total Spots" columns</li>
+                        <li>Date columns start after price column</li>
+                        <li>Parses spot counts using same date logic as Al Mulla</li>
+                    </ul>
+
+                    <code class="method-signature">private string FindValueInRow(DataTable sheet, params string[] labels)</code>
+                    <p>Searches for a label in row and returns the next non-empty cell value. Used for extracting metadata like company name, advertiser.</p>
+
+                    <code class="method-signature">private string FindValueBelow(DataTable sheet, params string[] labels)</code>
+                    <p>Searches for a label and returns value from cells below. Used for extracting values below labels (cost, spot count).</p>
+
+                    <code class="method-signature">private (int year, int month) FindYearAndMonth(DataTable sheet)</code>
+                    <p>Extracts year and month from sheet content using regex for 4-digit year and month name matching. Returns tuple with current date as fallback.</p>
+
+                    <code class="method-signature">private int FindRowIndex(DataTable sheet, params string[] contents)</code>
+                    <p>Finds first row containing any of the specified keywords. Case-insensitive comparison.</p>
+
+                    <code class="method-signature">private int FindColumnIndex(DataTable sheet, int headerRow, params string[] columnNames)</code>
+                    <p>Finds column index by header text. Case-insensitive, whitespace-normalized comparison.</p>
+                </div>
+            </div>
+
+            <div id="util-db" class="file-section">
+                <h3>5.2 DatabaseHelper.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\DatabaseHelper.cs</code></p>
+                <p><strong>Lines:</strong> ~120</p>
+                <p><strong>Purpose:</strong> Manage MySQL database connections and execute queries</p>
+
+                <h4>Class: DatabaseHelper</h4>
+
+                <div class="method">
+                    <h5>Constructor</h5>
+                    <code class="method-signature">public DatabaseHelper()</code>
+                    <p>Loads database credentials from environment variables and constructs MySQL connection string.</p>
+                    <pre><code>Connection String Format:
+"Server={host};Port={port};Database={database};User={user};Password={password};"
+
+Defaults:
+- Host: localhost
+- Port: 3306
+- Password: empty string if not specified</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>Public Methods</h5>
+
+                    <code class="method-signature">public List&lt;string&gt; GetComboBoxList(string sql)</code>
+                    <table class="param-table">
+                        <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>sql</td><td>string</td><td>SQL SELECT query</td></tr>
+                        <tr><th colspan="3">Returns</th></tr>
+                        <tr><td colspan="3">List of strings from first column of result set</td></tr>
+                    </table>
+                    <p>Used to populate ComboBox controls with database values. Shows MessageBox on error.</p>
+
+                    <code class="method-signature">public bool TestConnection()</code>
+                    <p>Tests database connectivity. Returns true if successful, false otherwise. Shows MessageBox with connection error details.</p>
+
+                    <code class="method-signature">public int ExecuteNonQuery(string sql)</code>
+                    <table class="param-table">
+                        <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>sql</td><td>string</td><td>INSERT, UPDATE, or DELETE statement</td></tr>
+                        <tr><th colspan="3">Returns</th></tr>
+                        <tr><td colspan="3">Number of rows affected</td></tr>
+                    </table>
+
+                    <code class="method-signature">public int ExecuteInsertAndGetId(string sql)</code>
+                    <table class="param-table">
+                        <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>sql</td><td>string</td><td>INSERT statement</td></tr>
+                        <tr><th colspan="3">Returns</th></tr>
+                        <tr><td colspan="3">Last inserted ID (auto-increment), or 0 on failure</td></tr>
+                    </table>
+                    <p>Uses MySQL's LAST_INSERT_ID() function to retrieve the auto-generated ID.</p>
+                </div>
+            </div>
+
+            <div id="util-grid" class="file-section">
+                <h3>5.3 CustomDataGridView.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\CustomDataGridView.cs</code></p>
+                <p><strong>Purpose:</strong> Extended DataGridView with clipboard and editing operations</p>
+
+                <h4>Class: CustomDataGridView (inherits from DataGridView)</h4>
+
+                <div class="method">
+                    <h5>Constructor</h5>
+                    <code class="method-signature">public CustomDataGridView()</code>
+                    <p>Initializes grid with:</p>
+                    <ul>
+                        <li>AllowUserToAddRows = false</li>
+                        <li>AllowUserToDeleteRows = false</li>
+                        <li>ClipboardCopyMode = EnableWithoutHeaderText</li>
+                    </ul>
+                </div>
+
+                <div class="method">
+                    <h5>Public Methods</h5>
+
+                    <code class="method-signature">public void Copy()</code>
+                    <p>Copies selected cells to system clipboard.</p>
+
+                    <code class="method-signature">public void Cut()</code>
+                    <p>Copies selected cells to clipboard and clears them.</p>
+
+                    <code class="method-signature">public void Paste()</code>
+                    <p>Pastes clipboard content starting from current cell. Tab-separated columns, newline-separated rows. Stops at grid edges.</p>
+
+                    <code class="method-signature">public void InsertRow()</code>
+                    <p>Inserts new row at current cell position.</p>
+
+                    <code class="method-signature">public void InsertColumn()</code>
+                    <p>Inserts new DataGridViewTextBoxColumn at current cell position.</p>
+
+                    <code class="method-signature">public void DeleteRow()</code>
+                    <p>Deletes all selected rows (if not new row).</p>
+
+                    <code class="method-signature">public void DeleteColumn()</code>
+                    <p>Deletes all selected columns.</p>
+
+                    <code class="method-signature">public void SetColumnName(int columnIndex, string name)</code>
+                    <p>Sets column header text at specified index.</p>
+
+                    <code class="method-signature">public void SetColumnWidth(int columnIndex, int width)</code>
+                    <p>Sets column width in pixels.</p>
+
+                    <code class="method-signature">public void SetRowHeight(int rowIndex, int height)</code>
+                    <p>Sets row height in pixels.</p>
+                </div>
+            </div>
+
+            <div id="util-combo" class="file-section">
+                <h3>5.4 EditableAutoCompleteComboBox.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\EditableAutoCompleteComboBox.cs</code></p>
+                <p><strong>Purpose:</strong> Custom ComboBox with autocomplete and automatic item addition</p>
+
+                <h4>Class: EditableAutoCompleteComboBox (inherits from ComboBox)</h4>
+
+                <div class="method">
+                    <h5>Constructor</h5>
+                    <code class="method-signature">public EditableAutoCompleteComboBox()</code>
+                    <p>Initializes with:</p>
+                    <ul>
+                        <li>HashSet&lt;string&gt; for tracking items</li>
+                        <li>DropDownStyle = DropDown (allows custom text entry)</li>
+                        <li>AutoCompleteMode = SuggestAppend</li>
+                        <li>AutoCompleteSource = ListItems</li>
+                        <li>Leave and TextChanged event handlers attached</li>
+                    </ul>
+                </div>
+
+                <div class="method">
+                    <h5>Public Methods</h5>
+
+                    <code class="method-signature">public void LoadAutoCompleteItems(IEnumerable&lt;string&gt; items)</code>
+                    <p>Loads items from collection into combo box. Clears existing items and filters null/whitespace.</p>
+
+                    <code class="method-signature">public void AddAutoCompleteItem(string item)</code>
+                    <p>Adds single item if not already exists and not null/whitespace.</p>
+
+                    <code class="method-signature">public List&lt;string&gt; GetAutoCompleteItems()</code>
+                    <p>Returns list of all autocomplete items.</p>
+
+                    <code class="method-signature">public void ClearAutoCompleteItems()</code>
+                    <p>Clears all items and resets text.</p>
+
+                    <code class="method-signature">public void PositionOverCell(DataGridView grid, int rowIndex, int columnIndex)</code>
+                    <p>Positions combo box overlay on a DataGridView cell by calculating display rectangle.</p>
+
+                    <code class="method-signature">public void HideComboBox()</code>
+                    <p>Sets Visible = false.</p>
+                </div>
+
+                <div class="info">
+                    <h5>Auto-Add Feature</h5>
+                    <p>When user leaves the combo box (OnLeaveComboBox event), any new text entered is automatically added to the items list. This allows users to add custom values that persist in the dropdown.</p>
+                </div>
+            </div>
+
+            <div id="util-autocomplete" class="file-section">
+                <h3>5.5 AutoComplete.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\AutoComplete.cs</code></p>
+                <p><strong>Lines:</strong> ~310</p>
+                <p><strong>Purpose:</strong> Self-contained autocomplete TextBox control with integrated suggestion list for DataGridView cell editing</p>
+
+                <h4>Class: AutoComplete (implements IDisposable)</h4>
+
+                <div class="field-list">
+                    <h5>Private Fields</h5>
+                    <table class="param-table">
+                        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>listBox</td><td>ListBox</td><td>Dropdown suggestion list</td></tr>
+                        <tr><td>allSuggestions</td><td>List&lt;string&gt;</td><td>Complete list of available suggestions</td></tr>
+                        <tr><td>isUpdatingText</td><td>bool</td><td>Flag to prevent recursive TextChanged events</td></tr>
+                        <tr><td>parentControl</td><td>Control</td><td>Parent container for BeginInvoke calls</td></tr>
+                        <tr><td>activationId</td><td>int</td><td>Counter to prevent stale cancel events when reactivating</td></tr>
+                    </table>
+                </div>
+
+                <div class="method">
+                    <h5>Constructor</h5>
+                    <code class="method-signature">public AutoComplete(Control parent, Point location, int width, Font font, List&lt;string&gt; suggestions)</code>
+                    <table class="param-table">
+                        <tr><th>Parameter</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>parent</td><td>Control</td><td>Parent control to host the TextBox and ListBox</td></tr>
+                        <tr><td>location</td><td>Point</td><td>Initial position of the TextBox</td></tr>
+                        <tr><td>width</td><td>int</td><td>Width of both TextBox and ListBox</td></tr>
+                        <tr><td>font</td><td>Font</td><td>Font for both controls</td></tr>
+                        <tr><td>suggestions</td><td>List&lt;string&gt;</td><td>Initial list of autocomplete suggestions</td></tr>
+                    </table>
+                    <p>Creates TextBox (LightYellow background, initially hidden) and ListBox (150px height), adds both to parent control, attaches all event handlers.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Public Properties</h5>
+                    <table class="param-table">
+                        <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>TextBox</td><td>TextBox (read-only)</td><td>Access to underlying TextBox control</td></tr>
+                        <tr><td>Text</td><td>string</td><td>Gets/sets TextBox text without triggering TextChanged</td></tr>
+                        <tr><td>Visible</td><td>bool</td><td>Gets/sets visibility of TextBox (hides ListBox when false)</td></tr>
+                    </table>
+                </div>
+
+                <div class="method">
+                    <h5>Public Methods</h5>
+
+                    <code class="method-signature">public void SetPosition(Point location, int width)</code>
+                    <p>Repositions both TextBox and ListBox to new location with specified width. Used when moving control to different cells.</p>
+
+                    <code class="method-signature">public void Clear()</code>
+                    <p>Clears TextBox text and ListBox items, hides ListBox. Uses isUpdatingText flag to prevent TextChanged event.</p>
+
+                    <code class="method-signature">public void Activate()</code>
+                    <p>Shows TextBox, brings controls to front, focuses TextBox, selects all text, and <strong>shows all suggestions immediately</strong>. Increments activationId to invalidate pending cancel events.</p>
+
+                    <code class="method-signature">public void Hide()</code>
+                    <p>Hides both TextBox and ListBox.</p>
+
+                    <code class="method-signature">public void UpdateSuggestions(List&lt;string&gt; newSuggestions)</code>
+                    <p>Replaces the suggestion list with new values at runtime.</p>
+
+                    <code class="method-signature">public void Dispose()</code>
+                    <p>Unsubscribes all event handlers, removes controls from parent, disposes TextBox and ListBox.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Events</h5>
+                    <table class="param-table">
+                        <tr><th>Event</th><th>Delegate</th><th>Description</th></tr>
+                        <tr><td>ItemSelected</td><td>void (string selectedItem, Keys commitKey)</td><td>Fired when user commits selection via Enter, Tab, or double-click</td></tr>
+                        <tr><td>EditCancelled</td><td>Action</td><td>Fired when user presses Escape or focus leaves both controls</td></tr>
+                        <tr><td>TextBoxMouseDown</td><td>Action&lt;MouseEventArgs&gt;</td><td>Fired on TextBox mouse down for parent handling</td></tr>
+                    </table>
+                </div>
+
+                <div class="method">
+                    <h5>Private Methods</h5>
+
+                    <code class="method-signature">private void ShowSuggestions(string filterText)</code>
+                    <p>Core filtering logic:</p>
+                    <ul>
+                        <li>If filterText is empty → shows all suggestions</li>
+                        <li>If filterText has content → filters suggestions using StartsWith (case-insensitive)</li>
+                        <li>Shows/hides ListBox based on whether matches exist</li>
+                    </ul>
+
+                    <code class="method-signature">private void CommitSelection(Keys commitKey)</code>
+                    <p>Sets TextBox text to selected item, hides ListBox, fires ItemSelected event with selected value and commit key.</p>
+                </div>
+
+                <div class="info">
+                    <h5>Keyboard Navigation</h5>
+                    <table class="param-table">
+                        <tr><th>Key</th><th>In TextBox</th><th>In ListBox</th></tr>
+                        <tr><td>Down Arrow</td><td>Focus ListBox, select first item</td><td>Navigate down</td></tr>
+                        <tr><td>Up Arrow</td><td>-</td><td>Navigate up</td></tr>
+                        <tr><td>Enter</td><td>Commit first/selected item</td><td>Commit selected item</td></tr>
+                        <tr><td>Tab</td><td>Commit first/selected item</td><td>Commit selected item</td></tr>
+                        <tr><td>Escape</td><td>Cancel edit, fire EditCancelled</td><td>Hide ListBox, return to TextBox</td></tr>
+                    </table>
+                </div>
+
+                <div class="new-feature">
+                    <h5>Show on Focus Feature</h5>
+                    <p>The AutoComplete control shows all suggestions immediately when activated (Activate() method), without requiring the user to type any characters first. As the user types, the list filters down to matching entries.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: WINDOWS FORMS -->
+        <section id="forms">
+            <h2>6. Windows Forms</h2>
+
+            <div id="form-program" class="file-section">
+                <h3>6.1 Program.cs (Entry Point)</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\Program.cs</code></p>
+
+                <pre><code>static class Program
+{
+    [STAThread]
+    static void Main()
+    {
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.Run(new SplashScreen());  // Starts with splash screen
+    }
+}</code></pre>
+            </div>
+
+            <div id="form-splash" class="file-section">
+                <h3>6.2 SplashScreen.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\SplashScreen.cs</code></p>
+                <p><strong>Purpose:</strong> Display splash screen for 3 seconds on application startup</p>
+
+                <h4>Class: SplashScreen (inherits from Form)</h4>
+
+                <div class="field-list">
+                    <h5>Fields</h5>
+                    <table class="param-table">
+                        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>splashTimer</td><td>System.Windows.Forms.Timer</td><td>Timer for 3-second delay</td></tr>
+                        <tr><td>SPLASH_DISPLAY_TIME</td><td>const int</td><td>3000 (milliseconds)</td></tr>
+                    </table>
+                </div>
+
+                <div class="method">
+                    <h5>Methods</h5>
+
+                    <code class="method-signature">private void InitializeSplashTimer()</code>
+                    <p>Creates timer with 3000ms interval, attaches tick handler, starts timer.</p>
+
+                    <code class="method-signature">private void SplashTimer_Tick(object sender, EventArgs e)</code>
+                    <p>Stops timer, creates MainMenuForm, shows it, hides splash screen.</p>
+
+                    <code class="method-signature">protected override void OnFormClosing(FormClosingEventArgs e)</code>
+                    <p>Cleans up timer resources.</p>
+                </div>
+            </div>
+
+            <div id="form-mainmenu" class="file-section">
+                <h3>6.3 MainMenuForm.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\MainMenuForm.cs</code></p>
+                <p><strong>Purpose:</strong> Main navigation menu for accessing booking management features</p>
+
+                <h4>Class: MainMenuForm (inherits from Form)</h4>
+
+                <div class="field-list">
+                    <h5>Fields</h5>
+                    <table class="param-table">
+                        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>jsonOutputPath</td><td>string</td><td>Path where processed JSON files are saved</td></tr>
+                    </table>
+                </div>
+
+                <div class="method">
+                    <h5>Methods</h5>
+
+                    <code class="method-signature">private void LoadEnvironmentVariables()</code>
+                    <p>Loads .env file, reads JSON_OUTPUT_PATH, creates output directory if needed. Shows warning if .env not found.</p>
+
+                    <code class="method-signature">private void btnSelectFile_Click(object sender, EventArgs e)</code>
+                    <p>Opens BookingManagerForm, hides MainMenuForm.</p>
+
+                    <code class="method-signature">private void ProcessExcelFile(string filePath)</code>
+                    <p><strong>Process:</strong></p>
+                    <ol>
+                        <li>Shows wait cursor</li>
+                        <li>Creates BookingOrderReader and processes file</li>
+                        <li>Checks for errors in result</li>
+                        <li>Deserializes JSON to BookingOrder object</li>
+                        <li>Saves JSON to configured output path</li>
+                        <li>Opens CalendarGridForm with booking data</li>
+                    </ol>
+
+                    <code class="method-signature">protected override void OnFormClosing(FormClosingEventArgs e)</code>
+                    <p>Exits application when form is closed.</p>
+                </div>
+
+                <h4>Designer Controls</h4>
+                <table>
+                    <tr><th>Control</th><th>Type</th><th>Purpose</th></tr>
+                    <tr><td>panelHeader</td><td>Panel</td><td>Dark header panel with title</td></tr>
+                    <tr><td>lblTitle</td><td>Label</td><td>"FlexGrid - Booking Order Processor"</td></tr>
+                    <tr><td>panelMain</td><td>Panel</td><td>Main content area</td></tr>
+                    <tr><td>btnSelectFile</td><td>Button</td><td>Opens BookingManagerForm</td></tr>
+                    <tr><td>btnPlaceholder</td><td>Button</td><td>Disabled placeholder for future features</td></tr>
+                    <tr><td>lblStatus</td><td>Label</td><td>Status message label</td></tr>
+                </table>
+            </div>
+
+            <div id="form-booking" class="file-section">
+                <h3>6.4 BookingManagerForm.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\BookingManagerForm.cs</code></p>
+                <p><strong>Lines:</strong> ~2500</p>
+                <p><strong>Purpose:</strong> Primary interface for creating, loading, and editing booking orders with calendar grid</p>
+
+                <h4>Class: BookingManagerForm (inherits from Form, implements IMessageFilter)</h4>
+
+                <div class="field-list">
+                    <h5>Fields</h5>
+                    <table class="param-table">
+                        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>currentBookingOrder</td><td>BookingOrder</td><td>Current booking being edited</td></tr>
+                        <tr><td>currentJsonFilePath</td><td>string</td><td>Path to current JSON file</td></tr>
+                        <tr><td>calendarDataTable</td><td>DataTable</td><td>Grid data source</td></tr>
+                        <tr><td>campaignStartDate</td><td>DateTime</td><td>Campaign start date</td></tr>
+                        <tr><td>campaignEndDate</td><td>DateTime</td><td>Campaign end date</td></tr>
+                        <tr><td>isUpdating</td><td>bool</td><td>Batch update flag (prevents recursive calculations)</td></tr>
+                        <tr><td>jsonOutputPath</td><td>string</td><td>JSON output directory</td></tr>
+                        <tr><td>grpGridMode</td><td>GroupBox</td><td>Grid mode selection container</td></tr>
+                        <tr><td>rbCampaignDates</td><td>RadioButton</td><td>Campaign Dates mode option</td></tr>
+                        <tr><td>rbSpecificDate</td><td>RadioButton</td><td>Specific Date mode option</td></tr>
+                        <tr><td>dtpSpecificDate</td><td>DateTimePicker</td><td>Specific date selector</td></tr>
+                        <tr><td>defaultGridMode</td><td>string</td><td>Default mode from settings ("CampaignDates")</td></tr>
+                        <tr><td>dealSearchDays</td><td>int</td><td>Deal search window (15 days)</td></tr>
+                        <tr><td>currentDealNumber</td><td>int</td><td>Current deal number for database</td></tr>
+                        <tr><td>suggestionListBox</td><td>ListBox</td><td>Autocomplete suggestion dropdown for Time/Programme columns</td></tr>
+                        <tr><td>currentEditingControl</td><td>Control</td><td>Currently active editing control (TextBox or ComboBox)</td></tr>
+                        <tr><td>currentEditingColumn</td><td>string</td><td>Name of column being edited</td></tr>
+                    </table>
+                </div>
+
+                <div class="new-feature">
+                    <h5>IMessageFilter Implementation</h5>
+                    <p>BookingManagerForm implements <code class="inline-code">IMessageFilter</code> to intercept keyboard messages at the application level. This enables arrow key navigation in the suggestion list even when focus is in the DataGridView editing control.</p>
+                    <pre><code>public bool PreFilterMessage(ref Message m)
+{
+    if (m.Msg == WM_KEYDOWN && suggestionListBox.Visible)
+    {
+        // Handle Down, Up, Enter, Escape, Tab keys
+        // for suggestion list navigation
+    }
+    return false;
+}</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>Initialization Methods</h5>
+
+                    <code class="method-signature">private void LoadSettings()</code>
+                    <p>Reads settings.json, loads DefaultGridMode and DealSearchDays. Falls back to defaults if file missing.</p>
+
+                    <code class="method-signature">private void InitializeGridModeControls()</code>
+                    <p>Creates dynamic GroupBox with radio buttons for grid mode selection and DateTimePicker for specific date.</p>
+
+                    <code class="method-signature">private void InitializeAutoCompleteData()</code>
+                    <p>Loads combo box options from database (agencies, advertisers, products). Sets default campaign dates.</p>
+
+                    <code class="method-signature">private void SetupEventHandlers()</code>
+                    <p>Attaches handlers for cell changes, date changes, keyboard shortcuts, etc.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Suggestion List Methods</h5>
+
+                    <code class="method-signature">private void ShowSuggestionList(Control editingControl, string columnName, string searchText)</code>
+                    <p>Displays suggestion list based on column type and search text. For Programme column, shows all suggestions when text is empty (show-on-focus feature). Positions list below the current cell.</p>
+
+                    <code class="method-signature">private void HideSuggestionList()</code>
+                    <p>Hides the suggestion ListBox.</p>
+
+                    <code class="method-signature">private void PositionSuggestionList()</code>
+                    <p>Calculates cell rectangle and positions ListBox below the current editing cell.</p>
+
+                    <code class="method-signature">private List&lt;string&gt; GetProgrammeSuggestions(string searchText, string timeValue)</code>
+                    <p>Queries database for programme names filtered by time slot and optional search text. Returns all programmes for the time when searchText is empty.</p>
+
+                    <code class="method-signature">private List&lt;string&gt; GetTimeSuggestions(string searchText)</code>
+                    <p>Returns time slot suggestions from database filtered by search text.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Database Lookup Methods</h5>
+
+                    <code class="method-signature">private (string Time, string Programme, string FP) GetProgrammeDetailsByOID(string oid, DateTime selectedDate)</code>
+                    <p>Fetches program details by OID and date. Returns tuple of Time, Programme name, Payment ratio. Used in Specific Date mode.</p>
+
+                    <code class="method-signature">private string GetPaymentRatio(string programme, string time)</code>
+                    <p>Gets payment ratio for programme/time combination by joining grid and prog_details tables.</p>
+
+                    <code class="method-signature">private string GetRatioByDur(int dur)</code>
+                    <p>Gets ratio multiplier by duration (0-215 seconds) from rate_card table.</p>
+
+                    <code class="method-signature">private List&lt;string&gt; GetProgrammeNameList()</code>
+                    <p>Gets distinct programme names from database.</p>
+
+                    <code class="method-signature">private List&lt;string&gt; GetProgrammeNameListByTime(string time)</code>
+                    <p>Gets programmes filtered by time slot.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Date Column Methods</h5>
+
+                    <code class="method-signature">private string GetDateColumnName(DateTime date)</code>
+                    <p>Generates column header: "Mo\n15\nJan" (day abbreviation, day number, month abbreviation).</p>
+
+                    <code class="method-signature">private DateTime? GetDateFromColumnName(string columnName)</code>
+                    <p>Parses column header back to DateTime.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Grid Rebuild Methods</h5>
+
+                    <code class="method-signature">private void RebuildGridWithShiftedSpots(DateTime newStartDate, DateTime newEndDate, int dayOffset)</code>
+                    <p>Rebuilds grid when campaign start date changes. Preserves spots at relative day positions (not absolute dates).</p>
+                    <div class="info">
+                        <strong>Example:</strong> If Day 1 had 2 spots and date shifts by 5 days, new Day 1 still has 2 spots.
+                    </div>
+
+                    <code class="method-signature">private void RebuildGridForDateRange(DateTime newStartDate, DateTime newEndDate)</code>
+                    <p>Rebuilds grid when campaign end date changes. Preserves spot data for dates that remain in range.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Pricing Methods</h5>
+
+                    <code class="method-signature">private void FormatPackageCost()</code>
+                    <p>Cleans package cost input: removes non-numeric except decimal, handles multiple decimal points, formats to 3 decimal places.</p>
+
+                    <code class="method-signature">private void RecalculatePricing()</code>
+                    <p><strong>Formula:</strong></p>
+                    <pre><code>Unit Price KWD = F/P × Ratio × Dur × (Package Cost / Total Paid Space)
+
+Where:
+  Total Paid Space = SUM(F/P × Ratio × Dur × Total Spots) for all rows</code></pre>
+                </div>
+
+                <div class="method">
+                    <h5>Grid Event Handlers</h5>
+
+                    <code class="method-signature">private void DgvCalendar_CellValueChanged(object sender, DataGridViewCellEventArgs e)</code>
+                    <p>Recalculates row total and column totals when cell value changes.</p>
+
+                    <code class="method-signature">private void DgvCalendar_CellEndEdit(object sender, DataGridViewCellEventArgs e)</code>
+                    <p>Handles:</p>
+                    <ul>
+                        <li>Time formatting when Time cell edited</li>
+                        <li>Auto-fill Programme when Time set (if only one match)</li>
+                        <li>Auto-fill F/P when Programme set</li>
+                        <li>Auto-fill details when OID set (Specific Date mode)</li>
+                        <li>Auto-fill Ratio when Dur set (0-215 validation)</li>
+                        <li>Triggers pricing recalculation</li>
+                    </ul>
+
+                    <code class="method-signature">private void DgvCalendar_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)</code>
+                    <p>Displays 0 as blank in date columns, alternating colors for date columns, Total row styling.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Utility Methods</h5>
+
+                    <code class="method-signature">private string FormatTimeInput(string input)</code>
+                    <p>Parses time input: removes non-digits, supports HH:mm format, allows up to 29:59 for broadcast overflow.</p>
+                    <div class="info">
+                        <strong>Examples:</strong> "1" → "01:00", "721" → "07:21", "1234" → "12:34"
+                    </div>
+
+                    <code class="method-signature">private void AutoFillFP(int rowIndex, string programme, string time)</code>
+                    <p>Queries payment ratio for programme/time and auto-fills F/P column.</p>
+
+                    <code class="method-signature">private void RecalculateRowTotal(int rowIndex)</code>
+                    <p>Sums all date column values for a row, updates "Total Spots" column.</p>
+
+                    <code class="method-signature">private void RecalculateColumnTotals()</code>
+                    <p>Sums all date columns across all data rows, updates Total row.</p>
+
+                    <code class="method-signature">private void ConvertToComboBoxColumn(string columnName, List&lt;string&gt; items)</code>
+                    <p>Converts text column to DataGridViewComboBoxColumn with FlatStyle.Flat.</p>
+
+                    <code class="method-signature">private List&lt;string&gt; GetBreakInList()</code>
+                    <p>Returns: ["WN", "BB", "MB", "EB", "SB", "CB"]</p>
+                </div>
+
+                <h4>Grid Columns</h4>
+                <table>
+                    <tr><th>Column</th><th>Width</th><th>Auto-fill</th><th>Notes</th></tr>
+                    <tr><td>OID</td><td>80px</td><td>Triggers lookup</td><td>Enabled in Specific Date mode only</td></tr>
+                    <tr><td>Time</td><td>60px</td><td>From OID or manual</td><td>Triggers Programme/F/P lookup</td></tr>
+                    <tr><td>Programme</td><td>150px</td><td>From OID or Time</td><td>ComboBox with autocomplete</td></tr>
+                    <tr><td>F/P</td><td>40px</td><td>From database</td><td>Payment ratio (P/F/S)</td></tr>
+                    <tr><td>Dur</td><td>40px</td><td>Manual</td><td>Integer 0-215, triggers Ratio lookup</td></tr>
+                    <tr><td>Ratio</td><td>50px</td><td>From rate_card</td><td>Based on Dur value</td></tr>
+                    <tr><td>Sales Type</td><td>70px</td><td>-</td><td>Default: WN</td></tr>
+                    <tr><td>ORD</td><td>40px</td><td>-</td><td>Order number</td></tr>
+                    <tr><td>Sponsor Type</td><td>90px</td><td>-</td><td>-</td></tr>
+                    <tr><td>Unit Price KWD</td><td>100px</td><td>-</td><td>Calculated price</td></tr>
+                    <tr><td>Price in US $</td><td>90px</td><td>-</td><td>-</td></tr>
+                    <tr><td>Date Columns</td><td>40px each</td><td>-</td><td>Format: "Day\nDate\nMonth"</td></tr>
+                    <tr><td>Total Spots</td><td>80px</td><td>Calculated</td><td>Read-only, sum of row</td></tr>
+                </table>
+
+                <h4>Designer Controls</h4>
+                <table>
+                    <tr><th>Control</th><th>Type</th><th>Purpose</th></tr>
+                    <tr><td>panelHeader</td><td>Panel</td><td>Title bar</td></tr>
+                    <tr><td>panelInfo</td><td>Panel</td><td>Agency, Advertiser, Product, dates, cost inputs</td></tr>
+                    <tr><td>panelActions</td><td>Panel</td><td>Action buttons</td></tr>
+                    <tr><td>panelGridMode</td><td>Panel</td><td>Grid mode radio buttons</td></tr>
+                    <tr><td>panelGrid</td><td>Panel</td><td>Main DataGridView container</td></tr>
+                    <tr><td>dgvCalendar</td><td>CustomDataGridView</td><td>Booking data grid</td></tr>
+                    <tr><td>cmbAgency</td><td>EditableAutoCompleteComboBox</td><td>Agency selector</td></tr>
+                    <tr><td>cmbAdvertiser</td><td>EditableAutoCompleteComboBox</td><td>Advertiser selector</td></tr>
+                    <tr><td>cmbProduct</td><td>EditableAutoCompleteComboBox</td><td>Product selector</td></tr>
+                    <tr><td>dtpCampaignStart</td><td>DateTimePicker</td><td>Campaign start date</td></tr>
+                    <tr><td>dtpCampaignEnd</td><td>DateTimePicker</td><td>Campaign end date</td></tr>
+                    <tr><td>txtPackageCost</td><td>TextBox</td><td>Package cost input</td></tr>
+                    <tr><td>btnSelectFile</td><td>Button</td><td>Load Excel file</td></tr>
+                    <tr><td>btnCreateNew</td><td>Button</td><td>Create new booking</td></tr>
+                    <tr><td>btnCalculate</td><td>Button</td><td>Calculate grouped bookings (orange)</td></tr>
+                    <tr><td>btnSave</td><td>Button</td><td>Save booking</td></tr>
+                    <tr><td>btnBack</td><td>Button</td><td>Return to menu</td></tr>
+                    <tr><td>lblRecordCount</td><td>Label</td><td>Total programs count</td></tr>
+                    <tr><td>lblTotalSpots</td><td>Label</td><td>Total spots count</td></tr>
+                </table>
+            </div>
+
+            <div id="form-calendar" class="file-section">
+                <h3>6.5 CalendarGridForm.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\CalendarGridForm.cs</code></p>
+                <p><strong>Purpose:</strong> Calendar-based view of booking spots, allows editing and saving</p>
+
+                <h4>Class: CalendarGridForm (inherits from Form)</h4>
+
+                <div class="field-list">
+                    <h5>Fields</h5>
+                    <table class="param-table">
+                        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>bookingOrder</td><td>BookingOrder</td><td>Current booking order</td></tr>
+                        <tr><td>jsonFilePath</td><td>string</td><td>Path to JSON file</td></tr>
+                        <tr><td>calendarDataTable</td><td>DataTable</td><td>Grid data source</td></tr>
+                        <tr><td>year</td><td>int</td><td>Campaign year</td></tr>
+                        <tr><td>month</td><td>int</td><td>Campaign month</td></tr>
+                        <tr><td>contextMenu</td><td>ContextMenuStrip</td><td>Right-click menu</td></tr>
+                        <tr><td>isUpdating</td><td>bool</td><td>Batch update flag</td></tr>
+                    </table>
+                </div>
+
+                <div class="method">
+                    <h5>Constructor</h5>
+                    <code class="method-signature">public CalendarGridForm(BookingOrder order, string filePath)</code>
+                    <p>Stores order and file path, calls LoadCalendarData(), UpdateHeaderLabels(), SetupContextMenu(), SetupKeyboardShortcuts(), SetupEditingHandlers().</p>
+                </div>
+
+                <div class="method">
+                    <h5>Key Methods</h5>
+
+                    <code class="method-signature">private void LoadCalendarData()</code>
+                    <p><strong>Process:</strong></p>
+                    <ol>
+                        <li>Extracts year/month from first booking date</li>
+                        <li>Creates columns: Metadata (11 fields) + Date columns + Total Spots</li>
+                        <li>Groups spots by programme/time (multiple spots same prog = one row)</li>
+                        <li>Counts occurrences per date</li>
+                        <li>Adds Total row with daily/grand totals</li>
+                        <li>Binds to DataGridView</li>
+                    </ol>
+
+                    <code class="method-signature">private void btnSave_Click(object sender, EventArgs e)</code>
+                    <p>Reconstructs booking order from grid, saves JSON to file, shows success message.</p>
+
+                    <code class="method-signature">private void UpdateBookingOrderFromCalendar()</code>
+                    <p>Reconstructs BookingOrder object from edited grid, rebuilds Spot objects, recalculates totals.</p>
+
+                    <code class="method-signature">private void ConfigureGridAppearance()</code>
+                    <p>Sets column widths, headers, readonly states, converts combo columns, styles Total row.</p>
+                </div>
+
+                <h4>Static Lists</h4>
+                <table>
+                    <tr><th>Method</th><th>Returns</th></tr>
+                    <tr><td>GetProgrammeNameList()</td><td>["Masrah Al Hayat", "Talk Show", "Warahom", "News", "Morning Show"]</td></tr>
+                    <tr><td>GetBreakInList()</td><td>["WN", "BB", "MB", "EB", "SB", "CB"]</td></tr>
+                    <tr><td>GetFPList()</td><td>["P", "F", "S"]</td></tr>
+                </table>
+            </div>
+
+            <div id="form-editor" class="file-section">
+                <h3>6.6 DataEditorForm.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\DataEditorForm.cs</code></p>
+                <p><strong>Purpose:</strong> Row-based (flattened) view of booking spots for detailed editing</p>
+
+                <h4>Class: DataEditorForm (inherits from Form)</h4>
+
+                <div class="field-list">
+                    <h5>Fields</h5>
+                    <table class="param-table">
+                        <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>bookingOrder</td><td>BookingOrder</td><td>Current booking order</td></tr>
+                        <tr><td>jsonFilePath</td><td>string</td><td>Path to JSON file</td></tr>
+                        <tr><td>dataTable</td><td>DataTable</td><td>Flattened data source</td></tr>
+                    </table>
+                </div>
+
+                <div class="method">
+                    <h5>Key Methods</h5>
+
+                    <code class="method-signature">private void LoadBookingOrderData()</code>
+                    <p>Flattens booking order into row-based view. Creates one row per booking spot (explodes by dates).</p>
+                    <div class="info">
+                        <strong>Example:</strong> 1 spot × 5 dates = 5 rows<br>
+                        <strong>Columns:</strong> Programme, Time, Duration, Date, Spot Index
+                    </div>
+
+                    <code class="method-signature">private void UpdateBookingOrderFromGrid()</code>
+                    <p>Groups rows by programme/time/duration, rebuilds Spot objects, recalculates totals.</p>
+
+                    <code class="method-signature">private void txtSearch_TextChanged(object sender, EventArgs e)</code>
+                    <p>Filters grid by search text across Programme, Time, Date columns. Shows filtered row count.</p>
+
+                    <code class="method-signature">private void btnExport_Click(object sender, EventArgs e)</code>
+                    <p>Opens SaveFileDialog for JSON export to new file.</p>
+                </div>
+            </div>
+
+            <div id="form-main" class="file-section">
+                <h3>6.7 MainForm.cs</h3>
+                <p><strong>File:</strong> <code class="inline-code">C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\MainForm.cs</code></p>
+                <p><strong>Purpose:</strong> Legacy form with basic grid operations (demo/development form)</p>
+
+                <h4>Class: MainForm (inherits from Form)</h4>
+
+                <div class="method">
+                    <h5>Constructor</h5>
+                    <code class="method-signature">public MainForm(int rowCount, int columnCount)</code>
+                    <p>Creates grid with specified dimensions. Initializes with sample data headers: Programme Name, Time, Break, F/P, KWD, USD.</p>
+                </div>
+
+                <div class="method">
+                    <h5>Key Methods</h5>
+
+                    <code class="method-signature">private void processBookingButton_Click(object sender, EventArgs e)</code>
+                    <p>Opens file dialog for Excel file, uses BookingOrderReader to process, shows JSON output in new form.</p>
+
+                    <code class="method-signature">private void ShowJsonOutput(string json)</code>
+                    <p>Creates form with RichTextBox, displays JSON in read-only view with Consolas 10pt font.</p>
+
+                    <code class="method-signature">protected override bool ProcessCmdKey(ref Message msg, Keys keyData)</code>
+                    <p>Handles keyboard shortcuts for all grid operations.</p>
+                </div>
+
+                <h4>Nested Class: InputDialog</h4>
+                <code class="method-signature">public static string Show(string title, string promptText, string value)</code>
+                <p>Simple input dialog for column renaming. Returns user-entered text or empty string if cancelled.</p>
+            </div>
+        </section>
+
+        <!-- SECTION 7: DATABASE INTEGRATION -->
+        <section id="database">
+            <h2>7. Database Integration</h2>
+
+            <div id="db-tables" class="file-section">
+                <h3>7.1 Database Tables</h3>
+                <p><strong>Database:</strong> u333577897_dbofhash</p>
+                <p><strong>Connection:</strong> MySQL via MySqlConnector</p>
+
+                <table>
+                    <tr><th>Table</th><th>Purpose</th><th>Key Columns</th></tr>
+                    <tr><td>grid</td><td>Main scheduling grid</td><td>tagid, ordinday, trans_dt, start_at</td></tr>
+                    <tr><td>prog_details</td><td>Program information</td><td>idprog_details, name_en, payment_ratio</td></tr>
+                    <tr><td>bookingdetails</td><td>Booking metadata</td><td>agency, advertiser, product</td></tr>
+                    <tr><td>bookingdetails2</td><td>Additional booking details</td><td>-</td></tr>
+                    <tr><td>rate_card</td><td>Duration-based rate multipliers</td><td>dur, ratio</td></tr>
+                    <tr><td>currency_rate</td><td>Campaign periods</td><td>id, period, start_date, end_date</td></tr>
+                </table>
+            </div>
+
+            <div id="db-queries" class="file-section">
+                <h3>7.2 SQL Queries Used</h3>
+
+                <h4>Get Agencies List</h4>
+                <div class="db-query">SELECT DISTINCT agency FROM bookingdetails ORDER BY agency</div>
+
+                <h4>Get Advertisers List</h4>
+                <div class="db-query">SELECT DISTINCT advertiser FROM bookingdetails ORDER BY advertiser</div>
+
+                <h4>Get Products List</h4>
+                <div class="db-query">SELECT DISTINCT product FROM bookingdetails ORDER BY product</div>
+
+                <h4>Get Programme Names</h4>
+                <div class="db-query">SELECT DISTINCT prog_details.name_en FROM prog_details ORDER BY name_en</div>
+
+                <h4>Get Programme Names by Time</h4>
+                <div class="db-query">SELECT DISTINCT name_en FROM u333577897_dbofhash.grid
+LEFT JOIN prog_details ON grid.tagid = prog_details.idprog_details
+WHERE start_at = '{time}'</div>
+
+                <h4>Get F/P (Payment Ratio) from Programme</h4>
+                <div class="db-query">SELECT payment_ratio
+FROM u333577897_dbofhash.grid
+LEFT JOIN prog_details ON grid.tagid = prog_details.idprog_details
+WHERE name_en = '{programme}' AND start_at = '{time}'</div>
+
+                <h4>Get Programme Details by OID (Specific Date mode)</h4>
+                <div class="db-query">SELECT start_at, name_en, payment_ratio
+FROM u333577897_dbofhash.grid
+LEFT JOIN prog_details ON grid.tagid = prog_details.idprog_details
+WHERE ordinday = '{oid}' AND trans_dt = '{specificDate}'</div>
+
+                <h4>Get Ratio by Duration</h4>
+                <div class="db-query">SELECT ratio
+FROM u333577897_dbofhash.rate_card
+WHERE dur = {duration}</div>
+
+                <h4>Get Campaign Periods</h4>
+                <div class="db-query">SELECT id, period, start_date, end_date
+FROM u333577897_dbofhash.currency_rate
+WHERE start_date &lt;= '{campaignEnd}' AND end_date &gt;= '{campaignStart}'
+ORDER BY start_date</div>
+            </div>
+        </section>
+
+        <!-- SECTION 8: FEATURE DETAILS -->
+        <section id="features">
+            <h2>8. Feature Details</h2>
+
+            <div id="feature-multimonth" class="new-feature">
+                <h3>8.1 Multi-Month Campaign Support</h3>
+                <p><strong>Implementation:</strong></p>
+                <ul>
+                    <li>Uses <code class="inline-code">campaignStartDate</code> and <code class="inline-code">campaignEndDate</code> instead of single month</li>
+                    <li>Date columns iterate from start to end date</li>
+                    <li>Column names include month: "Mo\n15\nJan" format</li>
+                    <li><code class="inline-code">GetDateColumnName(date)</code> helper generates consistent column names</li>
+                </ul>
+
+                <h4>Date Column Header Format</h4>
+                <pre><code>Mo    Tu    We    ...    Fr    Sa    Su
+15    16    17    ...    1     2     3
+Jan   Jan   Jan   ...    Feb   Feb   Feb</code></pre>
+            </div>
+
+            <div id="feature-dateshift" class="new-feature">
+                <h3>8.2 Smart Date Shifting</h3>
+                <p>Changing campaign start date shifts all spots while maintaining relative positions.</p>
+
+                <h4>Example</h4>
+                <pre><code>Original: Jan 12 - Jan 26 (15 days)
+  - Spot on day 1 (Jan 12): 5 spots
+  - Spot on day 5 (Jan 16): 3 spots
+
+User changes start to Jan 1:
+New: Jan 1 - Jan 15 (still 15 days)
+  - Spot on day 1 (Jan 1): 5 spots (shifted)
+  - Spot on day 5 (Jan 5): 3 spots (shifted)</code></pre>
+
+                <h4>Method</h4>
+                <p><code class="inline-code">RebuildGridWithShiftedSpots()</code> saves spots by day index and restores at same relative positions.</p>
+
+                <h4>Campaign Date Change Behavior</h4>
+                <table>
+                    <tr><th>Action</th><th>Result</th></tr>
+                    <tr>
+                        <td>Change Start Date</td>
+                        <td>
+                            - End date auto-adjusts to maintain campaign duration<br>
+                            - All spots shift to maintain relative positions<br>
+                            - Grid rebuilds with new date columns
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Change End Date</td>
+                        <td>
+                            - Grid extends or shrinks at the end<br>
+                            - Spots stay at their actual dates (no shifting)
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="feature-autofill" class="new-feature">
+                <h3>8.3 Auto-fill from Database</h3>
+                <table>
+                    <tr><th>Trigger</th><th>Action</th><th>Database Query</th></tr>
+                    <tr>
+                        <td>Enter Time (Campaign Dates mode)</td>
+                        <td>Looks up programme, fills F/P</td>
+                        <td>grid + prog_details tables</td>
+                    </tr>
+                    <tr>
+                        <td>Enter OID (Specific Date mode)</td>
+                        <td>Fills Time, Programme, F/P</td>
+                        <td>grid + prog_details with trans_dt</td>
+                    </tr>
+                    <tr>
+                        <td>Enter Dur (0-215)</td>
+                        <td>Fills Ratio</td>
+                        <td>rate_card table</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="feature-pricing" class="new-feature">
+                <h3>8.4 Pricing Calculation</h3>
+                <p><strong>Formula:</strong></p>
+                <pre><code>Unit Price KWD = F/P × Ratio × Dur × (Package Cost / Total Paid Space)
+
+Where:
+  F/P = Payment type factor (P=Paid, F=Free, S=Semi)
+  Ratio = Duration multiplier from rate_card
+  Dur = Duration in seconds
+  Package Cost = Total campaign cost
+  Total Paid Space = SUM(F/P × Ratio × Dur × Total Spots) for all rows</code></pre>
+
+                <h4>Calculation Triggers</h4>
+                <ul>
+                    <li>Package cost changes</li>
+                    <li>F/P column changes</li>
+                    <li>Ratio column changes</li>
+                    <li>Duration column changes</li>
+                    <li>Total spots changes</li>
+                </ul>
+            </div>
+
+            <div id="feature-calculate" class="new-feature">
+                <h3>8.5 Calculate Button Functionality</h3>
+                <p><strong>Location:</strong> Actions panel, orange button</p>
+                <p><strong>Purpose:</strong> Validate booking data and group by Duration + Period for rate calculation</p>
+
+                <h4>Process Flow</h4>
+                <ol>
+                    <li><strong>Step 1:</strong> Validate that all Dur cells contain integer values (0-215)</li>
+                    <li><strong>Step 2:</strong> Validate Advertiser field is not empty</li>
+                    <li><strong>Step 3:</strong> Get campaign periods from currency_rate table that overlap with campaign dates</li>
+                    <li><strong>Step 4:</strong> Group bookings by Duration and Period</li>
+                    <li><strong>Step 5:</strong> Display grouped bookings table</li>
+                </ol>
+
+                <h4>Booking Group Structure</h4>
+                <pre><code>class BookingGroup
+{
+    int Duration;           // e.g., 30
+    string PeriodName;      // e.g., "Period 1"
+    DateTime EffectiveStart; // Intersection start
+    DateTime EffectiveEnd;   // Intersection end
+    int TotalSpots;         // Sum of spots in this group
+}</code></pre>
+
+                <h4>Output Table Example</h4>
+                <table>
+                    <tr><th>Duration</th><th>Period</th><th>Period Range</th><th>Total Spots</th></tr>
+                    <tr><td>30 sec</td><td>Period 1</td><td>2026-01-01 to 2026-01-15</td><td>45</td></tr>
+                    <tr><td>30 sec</td><td>Period 2</td><td>2026-01-16 to 2026-01-31</td><td>30</td></tr>
+                    <tr><td>60 sec</td><td>Period 1</td><td>2026-01-01 to 2026-01-15</td><td>20</td></tr>
+                    <tr><td colspan="3"><strong>GRAND TOTAL</strong></td><td><strong>95</strong></td></tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 9: SUPPORTED EXCEL FORMATS -->
+        <section id="formats">
+            <h2>9. Supported Excel Formats</h2>
+
+            <table>
+                <tr><th>Format</th><th>Detection Keywords</th><th>Parser Method</th></tr>
+                <tr>
+                    <td>Al Mulla</td>
+                    <td>"Al Mulla", "PROGRAMS", company name patterns</td>
+                    <td>ParseAlMulla() + ParseAlMullaSchedule()</td>
+                </tr>
+                <tr>
+                    <td>Direct-NCCAL</td>
+                    <td>"Direct", "NCCAL", "Programs Name"</td>
+                    <td>ParseDirectNCCAL() + ParseDirectNCCALSchedule()</td>
+                </tr>
+                <tr>
+                    <td>Royal Pharmacies</td>
+                    <td>Similar to Al Mulla format</td>
+                    <td>Uses Al Mulla parser</td>
+                </tr>
+                <tr>
+                    <td>Zain</td>
+                    <td>Similar to Direct-NCCAL format</td>
+                    <td>Uses Direct-NCCAL parser</td>
+                </tr>
+            </table>
+
+            <h3>Format Detection Logic</h3>
+            <pre><code>1. Open Excel file with ExcelDataReader
+2. Find the sheet with most data (rows × columns, min 10×10)
+3. Search for format-specific keywords:
+   - If "Al Mulla" or "PROGRAMS" found → Al Mulla format
+   - If "Direct" or "Programs Name" found → Direct-NCCAL format
+4. Parse metadata (Agency, Advertiser, Product, Cost)
+5. Find calendar header row
+6. Extract date columns and spot counts
+7. Build BookingOrder object with Spot list</code></pre>
+        </section>
+
+        <!-- SECTION 10: KEYBOARD SHORTCUTS -->
+        <section id="keyboard">
+            <h2>10. Keyboard Shortcuts</h2>
+
+            <table>
+                <tr><th>Shortcut</th><th>Action</th><th>Available In</th></tr>
+                <tr><td>Ctrl+C</td><td>Copy selected cells</td><td>All grid forms</td></tr>
+                <tr><td>Ctrl+V</td><td>Paste clipboard content</td><td>All grid forms</td></tr>
+                <tr><td>Ctrl+X</td><td>Cut selected cells</td><td>MainForm only</td></tr>
+                <tr><td>Delete</td><td>Clear selected cells</td><td>All grid forms</td></tr>
+                <tr><td>Ctrl+I</td><td>Insert row</td><td>MainForm only</td></tr>
+                <tr><td>Ctrl+Shift+I</td><td>Insert column</td><td>MainForm only</td></tr>
+                <tr><td>Ctrl+D</td><td>Delete row</td><td>MainForm only</td></tr>
+                <tr><td>Ctrl+Shift+D</td><td>Delete column</td><td>MainForm only</td></tr>
+            </table>
+
+            <h3>Right-Click Context Menu</h3>
+            <ul>
+                <li>Add Row - Adds new row before Total row</li>
+                <li>Delete Row - Deletes selected rows (not Total row)</li>
+                <li>Copy (Ctrl+C) - Copy selected cells</li>
+                <li>Paste (Ctrl+V) - Paste clipboard content</li>
+            </ul>
+        </section>
+
+        <!-- SECTION 11: APPLICATION FLOW -->
+        <section id="appflow">
+            <h2>11. Application Flow</h2>
+
+            <div class="flow">
+                <h3>Startup Sequence</h3>
+                <pre><code>Program.Main()
+    │
+    ▼
+SplashScreen (3 second display)
+    │
+    ▼
+MainMenuForm (main menu)
+    │
+    ├──► [Button: Create/Edit Booking]
+    │        │
+    │        ▼
+    │    BookingManagerForm
+    │        │
+    │        ├──► [Load Excel file]
+    │        │        │
+    │        │        ▼
+    │        │    BookingOrderReader.ProcessBookingOrder()
+    │        │        │
+    │        │        ▼
+    │        │    Returns JSON → Saved to file
+    │        │        │
+    │        │        ▼
+    │        │    CalendarGridForm or DataEditorForm
+    │        │
+    │        └──► [Create new booking]
+    │                 │
+    │                 ▼
+    │             Manual data entry in grid
+    │
+    └──► [Button: Coming Soon] (disabled)</code></pre>
+            </div>
+
+            <div class="flow">
+                <h3>File Processing Workflow</h3>
+                <pre><code>Excel File (.xlsx, .xls)
+    │
+    ▼
+BookingOrderReader.ProcessBookingOrder()
+    ├─ Detects format (Al Mulla or Direct-NCCAL)
+    ├─ Parses metadata
+    ├─ Parses calendar schedule
+    └─ Returns JSON string
+    │
+    ▼
+BookingOrder JSON
+    ├─ Saved to ProcessedOrders folder
+    └─ Loaded into CalendarGridForm or DataEditorForm
+    │
+    ▼
+User edits data
+    │
+    ▼
+Reconstructs BookingOrder object
+    │
+    ▼
+Saves JSON back to file</code></pre>
+            </div>
+
+            <div class="flow">
+                <h3>Grid Mode Workflow</h3>
+                <pre><code>Campaign Dates Mode:
+─────────────────────
+1. OID column disabled (grayed out)
+2. User enters Time value
+3. System looks up programmes by time
+4. If single match: auto-fill Programme
+5. User selects/confirms Programme
+6. System auto-fills F/P from database
+7. User enters Duration (0-215)
+8. System auto-fills Ratio from rate_card
+
+Specific Date Mode:
+───────────────────
+1. User selects specific date from picker
+2. OID column enabled
+3. User enters OID value
+4. System queries database with OID + Date
+5. Auto-fills: Time, Programme, F/P
+6. User enters Duration
+7. System auto-fills Ratio</code></pre>
+            </div>
+        </section>
+
+        <!-- SECTION 12: FILE STRUCTURE -->
+        <section id="filestructure">
+            <h2>12. Complete File Structure</h2>
+
+            <pre><code>CSharpFlexGrid/
+│
+├── CSharpFlexGrid.csproj           # Project file with NuGet dependencies
+├── CSharpFlexGrid.sln              # Visual Studio solution file
+├── .env                             # Database and path configuration
+├── settings.json                    # Application settings
+│
+├── Program.cs                       # Application entry point
+│
+├── Forms/
+│   ├── SplashScreen.cs             # Splash screen (3 sec)
+│   ├── SplashScreen.Designer.cs    # Auto-generated UI code
+│   ├── MainMenuForm.cs             # Main navigation menu
+│   ├── MainMenuForm.Designer.cs    # Auto-generated UI code
+│   ├── MainMenuForm.resx           # Form resources
+│   ├── BookingManagerForm.cs       # Primary booking interface (~2500 lines)
+│   ├── BookingManagerForm.Designer.cs
+│   ├── BookingManagerForm.resx
+│   ├── CalendarGridForm.cs         # Calendar-based spot view
+│   ├── CalendarGridForm.Designer.cs
+│   ├── DataEditorForm.cs           # Row-based spot editor
+│   ├── DataEditorForm.Designer.cs
+│   ├── DataEditorForm.resx
+│   ├── MainForm.cs                 # Legacy demo form
+│   ├── MainForm.Designer.cs
+│   ├── MainForm.resx
+│   └── SetupForm.Designer.cs       # Setup form (reference only)
+│
+├── Models/
+│   └── BookingOrderModels.cs       # BookingOrder, Spot, CampaignPeriod (~60 lines)
+│
+├── Utilities/
+│   ├── BookingOrderReader.cs       # Excel parser (~500 lines)
+│   ├── DatabaseHelper.cs           # MySQL operations (~120 lines)
+│   ├── CustomDataGridView.cs       # Extended DataGridView
+│   ├── EditableAutoCompleteComboBox.cs # Custom ComboBox
+│   └── AutoComplete.cs             # Autocomplete TextBox (~310 lines)
+│
+├── ProcessedOrders/                # JSON output directory
+│   └── *.json                      # Processed booking files
+│
+├── bin/
+│   └── Debug/
+│       └── net9.0-windows/         # Build output
+│           ├── CSharpFlexGrid.exe
+│           ├── CSharpFlexGrid.dll
+│           └── ProcessedOrders/
+│
+└── obj/                            # Build intermediates</code></pre>
+
+            <h3>Lines of Code Summary</h3>
+            <table>
+                <tr><th>File</th><th>Approx. Lines</th><th>Purpose</th></tr>
+                <tr><td>BookingManagerForm.cs</td><td>~2500</td><td>Main form with all booking logic</td></tr>
+                <tr><td>BookingOrderReader.cs</td><td>~500</td><td>Excel parser</td></tr>
+                <tr><td>CalendarGridForm.cs</td><td>~400</td><td>Calendar view</td></tr>
+                <tr><td>DataEditorForm.cs</td><td>~200</td><td>Row-based editor</td></tr>
+                <tr><td>DatabaseHelper.cs</td><td>~120</td><td>Database operations</td></tr>
+                <tr><td>CustomDataGridView.cs</td><td>~100</td><td>Grid extensions</td></tr>
+                <tr><td>EditableAutoCompleteComboBox.cs</td><td>~80</td><td>Custom combo box</td></tr>
+                <tr><td>AutoComplete.cs</td><td>~310</td><td>Autocomplete TextBox control</td></tr>
+                <tr><td>BookingOrderModels.cs</td><td>~60</td><td>Data models</td></tr>
+                <tr><td>MainMenuForm.cs</td><td>~100</td><td>Main menu</td></tr>
+                <tr><td>SplashScreen.cs</td><td>~50</td><td>Splash screen</td></tr>
+                <tr><td>MainForm.cs</td><td>~150</td><td>Legacy form</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>~4570</strong></td><td></td></tr>
+            </table>
+        </section>
+
+        <footer style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; color: #7f8c8d;">
+            <p><strong>Document Version:</strong> 6.1 - AutoComplete Control Documentation</p>
+            <p><strong>Last Updated:</strong> Tuesday, 28 January 2026</p>
+            <p><strong>Build Status:</strong> <span class="success">Build Succeeded</span></p>
+            <p><strong>Project Status:</strong> <span class="success">Production Ready</span></p>
+            <p><strong>Documentation Coverage:</strong> <span class="success">100% - All classes, methods, and configurations documented</span></p>
+        </footer>
+    </div>
+</body>
+</html>

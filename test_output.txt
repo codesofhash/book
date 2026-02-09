@@ -1,0 +1,574 @@
+Testing Excel File Parsing
+================================================================================
+
+1. Testing: Al Mulla.xlsx
+--------------------------------------------------------------------------------
+{
+  "agency": "Al Mulla Exchange",
+  "advertiser": "Al Mulla Exchange",
+  "product": null,
+  "company_name": "Al Mulla Exchange",
+  "campaign_period": {
+    "start_date": "2024-01-01",
+    "end_date": "2024-01-20"
+  },
+  "gross_cost": 13000.0,
+  "total_spots": 80,
+  "spots": [
+    {
+      "programme_name": "Talk Show “With Bu Shoail”",
+      "programme_start_time": "23:00",
+      "duration": "52\"",
+      "dates": [
+        "2024-01-01",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-06",
+        "2024-01-07",
+        "2024-01-08",
+        "2024-01-09",
+        "2024-01-10",
+        "2024-01-11",
+        "2024-01-12",
+        "2024-01-13",
+        "2024-01-14",
+        "2024-01-15"
+      ],
+      "total_spots": 15
+    },
+    {
+      "programme_name": "Talk Show “With Bu Shoail”",
+      "programme_start_time": "23:00",
+      "duration": "32\"",
+      "dates": [
+        "2024-01-01",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-06",
+        "2024-01-07",
+        "2024-01-08",
+        "2024-01-09",
+        "2024-01-10",
+        "2024-01-11",
+        "2024-01-12",
+        "2024-01-13",
+        "2024-01-14",
+        "2024-01-15",
+        "2024-01-16",
+        "2024-01-17",
+        "2024-01-18",
+        "2024-01-19",
+        "2024-01-20"
+      ],
+      "total_spots": 20
+    },
+    {
+      "programme_name": "Talk Show “With Bu Shoail”",
+      "programme_start_time": "23:00",
+      "duration": "27\"",
+      "dates": [
+        "2024-01-01",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-06",
+        "2024-01-07",
+        "2024-01-08",
+        "2024-01-09",
+        "2024-01-10",
+        "2024-01-11",
+        "2024-01-12",
+        "2024-01-13",
+        "2024-01-14",
+        "2024-01-15",
+        "2024-01-16",
+        "2024-01-17",
+        "2024-01-18",
+        "2024-01-19",
+        "2024-01-20"
+      ],
+      "total_spots": 20
+    },
+    {
+      "programme_name": "Talk Show “With Bu Shoail”- Rerun",
+      "programme_start_time": "12:55",
+      "duration": "52\"",
+      "dates": [
+        "2024-01-01",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05"
+      ],
+      "total_spots": 5
+    },
+    {
+      "programme_name": "Talk Show “With Bu Shoail”- Rerun",
+      "programme_start_time": "12:55",
+      "duration": "32\"",
+      "dates": [
+        "2024-01-01",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-06",
+        "2024-01-07",
+        "2024-01-08",
+        "2024-01-09",
+        "2024-01-10"
+      ],
+      "total_spots": 10
+    },
+    {
+      "programme_name": "Talk Show “With Bu Shoail”- Rerun",
+      "programme_start_time": "12:55",
+      "duration": "27\"",
+      "dates": [
+        "2024-01-01",
+        "2024-01-02",
+        "2024-01-03",
+        "2024-01-04",
+        "2024-01-05",
+        "2024-01-06",
+        "2024-01-07",
+        "2024-01-08",
+        "2024-01-09",
+        "2024-01-10"
+      ],
+      "total_spots": 10
+    }
+  ]
+}
+
+
+2. Testing: Royal Pharmacies - Ramadan 2025- Schedule.xlsx
+--------------------------------------------------------------------------------
+{"error":"AlMulla: Column 'PROGRAMS' or similar not found.","stackTrace":"   at CSharpFlexGrid.BookingOrderReader.ParseAlMullaSchedule(DataTable sheet, BookingOrder bookingOrder) in C:\\Users\\hashi\\Desktop\\book\\C#\\CSharpFlexGrid\\BookingOrderReader.cs:line 123\r\n   at CSharpFlexGrid.BookingOrderReader.ParseAlMulla(DataTable sheet, BookingOrder bookingOrder) in C:\\Users\\hashi\\Desktop\\book\\C#\\CSharpFlexGrid\\BookingOrderReader.cs:line 88\r\n   at CSharpFlexGrid.BookingOrderReader.ProcessBookingOrder(String filePath) in C:\\Users\\hashi\\Desktop\\book\\C#\\CSharpFlexGrid\\BookingOrderReader.cs:line 43"}
+
+
+3. Testing: Direct-NCCAL-NCCAL-No ADV Media-41 sec.xls
+--------------------------------------------------------------------------------
+{
+  "agency": "DIRECT",
+  "advertiser": "NATIONAL COUNCIL FOR CULTURE ARTS LETTER",
+  "product": "NCCAL",
+  "company_name": "DIRECT",
+  "campaign_period": {
+    "start_date": "2025-09-01",
+    "end_date": "2025-09-09"
+  },
+  "gross_cost": 2227.0,
+  "total_spots": 54,
+  "spots": [
+    {
+      "programme_name": "DW-Tomorrow Today",
+      "programme_start_time": "13:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-01",
+        "2025-09-08"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Made In Germany",
+      "programme_start_time": "13:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-04"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-Euro Max",
+      "programme_start_time": "13:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-07"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-Drive it",
+      "programme_start_time": "13:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-06"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-In Good Shape",
+      "programme_start_time": "13:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-03"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Your Health Matters",
+      "programme_start_time": "13:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-02"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Maa Bou Shuail",
+      "programme_start_time": "13:15",
+      "duration": "41",
+      "dates": [
+        "2025-09-09"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-Euro Max",
+      "programme_start_time": "13:20",
+      "duration": "41",
+      "dates": [
+        "2025-09-05"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Masraa",
+      "programme_start_time": "14:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-06"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Bidoon Tamata",
+      "programme_start_time": "14:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-03"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Al Sirdab",
+      "programme_start_time": "14:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-01"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Khuda Bibasata",
+      "programme_start_time": "14:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-04"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Abla Farah",
+      "programme_start_time": "14:10",
+      "duration": "41",
+      "dates": [
+        "2025-09-07"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Al Sirdab",
+      "programme_start_time": "14:10",
+      "duration": "41",
+      "dates": [
+        "2025-09-08"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Mowdoa",
+      "programme_start_time": "14:20",
+      "duration": "41",
+      "dates": [
+        "2025-09-05"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Iqtisadiyat Quraniyah",
+      "programme_start_time": "14:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-02",
+        "2025-09-09"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Inside the Box",
+      "programme_start_time": "19:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-02",
+        "2025-09-09"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Khair Ahli",
+      "programme_start_time": "19:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-01",
+        "2025-09-08"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Alfa",
+      "programme_start_time": "19:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-04"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "V Thru",
+      "programme_start_time": "19:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-06"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Morni",
+      "programme_start_time": "19:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-07"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Masraa",
+      "programme_start_time": "19:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-03"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Abla Farah",
+      "programme_start_time": "19:10",
+      "duration": "41",
+      "dates": [
+        "2025-09-05"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Derwaza",
+      "programme_start_time": "20:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-03"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Alnaalia",
+      "programme_start_time": "20:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-01",
+        "2025-09-08"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Sanadiq Al3omr",
+      "programme_start_time": "20:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-04"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Bidoon Tamata",
+      "programme_start_time": "20:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-05"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Bait Al Omar",
+      "programme_start_time": "20:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-06"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Mowdoa",
+      "programme_start_time": "20:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-07"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Om Sa3f",
+      "programme_start_time": "20:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-02",
+        "2025-09-09"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Tomorrow Today",
+      "programme_start_time": "21:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-07"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-Made In Germany",
+      "programme_start_time": "21:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-03",
+        "2025-09-06"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Euro Max",
+      "programme_start_time": "21:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-04"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-Global",
+      "programme_start_time": "21:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-01",
+        "2025-09-08"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Drive it",
+      "programme_start_time": "21:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-05"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-In Good Shape",
+      "programme_start_time": "21:00",
+      "duration": "41",
+      "dates": [
+        "2025-09-02",
+        "2025-09-09"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "With Bu Shuail",
+      "programme_start_time": "21:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-05"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Al Aounan's Feast",
+      "programme_start_time": "21:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-06"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Abla Farah",
+      "programme_start_time": "21:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-04"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Bidoon Tamata",
+      "programme_start_time": "21:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-02",
+        "2025-09-09"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Maa Bou Shuail",
+      "programme_start_time": "21:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-01",
+        "2025-09-08"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Khuda Bibasata",
+      "programme_start_time": "21:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-03"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Rihla",
+      "programme_start_time": "21:30",
+      "duration": "41",
+      "dates": [
+        "2025-09-07"
+      ],
+      "total_spots": 1
+    }
+  ]
+}
+
+================================================================================
+Testing complete. Press any key to exit...
+Unhandled exception. System.InvalidOperationException: Cannot read keys when either application does not have a console or when console input has been redirected. Try Console.Read.
+   at System.ConsolePal.ReadKey(Boolean intercept)
+   at CSharpFlexGrid.TestParser.Main(String[] args) in C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\TestParser.cs:line 63

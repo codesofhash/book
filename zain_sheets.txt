@@ -1,0 +1,28 @@
+Checking Zain.xlsx sheets...
+================================================================================
+Total Sheets: 3
+
+Sheet 0: Sheet2
+  Rows: 9, Columns: 2
+  First 5 rows:
+    Row 0: 
+    Row 1: [C0=DAYNUM] [C1=DAY] 
+    Row 2: [C0=1] [C1=Su] 
+    Row 3: [C0=2] [C1=Mo] 
+    Row 4: [C0=3] [C1=Tu] 
+
+Sheet 1: ADV CONTRACT
+  Rows: 86, Columns: 35
+  First 5 rows:
+    Row 0: 
+    Row 1: 
+    Row 2: 
+    Row 3: 
+    Row 4: [C1=AL RAI TV SALES TEAM CONTACT] 
+
+Sheet 2: Sheet3
+  Rows: 0, Columns: 0
+  First 5 rows:
+
+
+Press any key to exit...

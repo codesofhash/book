@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet build:*)",
+      "Bash(taskkill:*)",
+      "Bash(dir /s /b *.md)",
+      "Bash(ls:*)"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+Diagnosing Zain.xlsx
+================================================================================
+JSON Output:
+{"error":"AlMulla: Header row with 'PROGRAMS' or similar not found.","stackTrace":"   at CSharpFlexGrid.BookingOrderReader.ParseAlMullaSchedule(DataTable sheet, BookingOrder bookingOrder) in C:\\Users\\hashi\\Desktop\\book\\C#\\CSharpFlexGrid\\BookingOrderReader.cs:line 117\r\n   at CSharpFlexGrid.BookingOrderReader.ParseAlMulla(DataTable sheet, BookingOrder bookingOrder) in C:\\Users\\hashi\\Desktop\\book\\C#\\CSharpFlexGrid\\BookingOrderReader.cs:line 88\r\n   at CSharpFlexGrid.BookingOrderReader.ProcessBookingOrder(String filePath) in C:\\Users\\hashi\\Desktop\\book\\C#\\CSharpFlexGrid\\BookingOrderReader.cs:line 43"}
+
+================================================================================
+Press any key to continue to dump...
+Dump written to: C:\Users\hashi\Desktop\book\C#\CSharpFlexGrid\dump_zain.txt
+
+Dump complete. Check dump_zain.txt

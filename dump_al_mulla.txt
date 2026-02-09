@@ -1,0 +1,60 @@
+File: Al Mulla.xlsx
+Total Rows: 57, Total Columns: 35
+================================================================================
+
+Row   0: 
+Row   1: 
+Row   2: 
+Row   3: 
+Row   4: [C1=AL RAI TV SALES TEAM CONTACT] [C16=Agency/Client Information                                                  Responsible for receiving invoices?  Yes          No ] 
+Row   5: 
+Row   6: [C1=Contact Person:] [C2=Ahmed Saeed] [C16=Company Name:] [C21=Al Mulla Exchange] 
+Row   7: [C1=Designation:] [C2=Sales Manager] [C16=Contact Person:] [C21=Kareem Al Khellawi] 
+Row   8: [C1=Contact Number:] [C16=Address:] 
+Row   9: [C2=AL RAI TV] [C16=Phone:] 
+Row  10: 
+Row  11: [C2=P.O. Box 2292/13023  KUWAIT] [C16=ADVERTISER:] [C21=Al Mulla Exchange] 
+Row  12: [C16=PRODUCT:] 
+Row  13: [C16=Version: ] [C21=52", 32", 27"] 
+Row  14: [C1=Ramadan 2024] [C4=01/01/1900 00:00:00] [C5=02/01/1900 00:00:00] [C6=03/01/1900 00:00:00] [C7=04/01/1900 00:00:00] [C8=05/01/1900 00:00:00] [C9=06/01/1900 00:00:00] [C10=07/01/1900 00:00:00] [C11=08/01/1900 00:00:00] [C12=09/01/1900 00:00:00] [C13=10/01/1900 00:00:00] [C14=11/01/1900 00:00:00] [C15=12/01/1900 00:00:00] [C16=13/01/1900 00:00:00] [C17=14/01/1900 00:00:00] [C18=15/01/1900 00:00:00] [C19=16/01/1900 00:00:00] [C20=17/01/1900 00:00:00] [C21=18/01/1900 00:00:00] [C22=19/01/1900 00:00:00] [C23=20/01/1900 00:00:00] [C24=21/01/1900 00:00:00] [C25=22/01/1900 00:00:00] [C26=23/01/1900 00:00:00] [C27=24/01/1900 00:00:00] [C28=25/01/1900 00:00:00] [C29=26/01/1900 00:00:00] [C30=27/01/1900 00:00:00] [C31=28/01/1900 00:00:00] [C32=29/01/1900 00:00:00] [C33=30/01/1900 00:00:00] [C34=Total] 
+Row  15: [C1=PROGRAMS] [C2=TIME] [C3=DUR] 
+Row  16: [C1=Talk Show “With Bu Shoail”] [C2=31/12/1899 23:00:00] [C3=52"] [C4=1] [C5=1] [C6=1] [C7=1] [C8=1] [C9=1] [C10=1] [C11=1] [C12=1] [C13=1] [C14=1] [C15=1] [C16=1] [C17=1] [C18=1] [C34=15] 
+Row  17: [C1=Talk Show “With Bu Shoail”] [C2=31/12/1899 23:00:00] [C3=32"] [C4=1] [C5=1] [C6=1] [C7=1] [C8=1] [C9=1] [C10=1] [C11=1] [C12=1] [C13=1] [C14=1] [C15=1] [C16=1] [C17=1] [C18=1] [C19=1] [C20=1] [C21=1] [C22=1] [C23=1] [C34=20] 
+Row  18: [C1=Talk Show “With Bu Shoail”] [C2=31/12/1899 23:00:00] [C3=27"] [C4=1] [C5=1] [C6=1] [C7=1] [C8=1] [C9=1] [C10=1] [C11=1] [C12=1] [C13=1] [C14=1] [C15=1] [C16=1] [C17=1] [C18=1] [C19=1] [C20=1] [C21=1] [C22=1] [C23=1] [C34=20] 
+Row  19: [C34=0] 
+Row  20: [C34=0] 
+Row  21: [C1=Talk Show “With Bu Shoail”- Rerun] [C2=31/12/1899 12:55:00] [C3=52"] [C4=1] [C5=1] [C6=1] [C7=1] [C8=1] [C34=5] 
+Row  22: [C1=Talk Show “With Bu Shoail”- Rerun] [C2=31/12/1899 12:55:00] [C3=32"] [C4=1] [C5=1] [C6=1] [C7=1] [C8=1] [C9=1] [C10=1] [C11=1] [C12=1] [C13=1] [C34=10] 
+Row  23: [C1=Talk Show “With Bu Shoail”- Rerun] [C2=31/12/1899 12:55:00] [C3=27"] [C4=1] [C5=1] [C6=1] [C7=1] [C8=1] [C9=1] [C10=1] [C11=1] [C12=1] [C13=1] [C34=10] 
+Row  24: [C34=0] 
+Row  25: [C1=PAGE TOTAL] [C4=6] [C5=6] [C6=6] [C7=6] [C8=6] [C9=5] [C10=5] [C11=5] [C12=5] [C13=5] [C14=3] [C15=3] [C16=3] [C17=3] [C18=3] [C19=2] [C20=2] [C21=2] [C22=2] [C23=2] [C24=0] [C25=0] [C26=0] [C27=0] [C28=0] [C29=0] [C30=0] [C31=0] [C32=0] [C33=0] [C34=80] 
+Row  26: 
+Row  27: 
+Row  28: 
+Row  29: 
+Row  30: 
+Row  31: [C1=ADVERTISING TERMS & CONDITIONS] 
+Row  32: [C1=1. Spot Position: Unless otherwise specified in the commercial offer, spots will be transmitted in random position within the selected  break.
+2. Programming Time and Scheduling: Programming time of each program in AL RAI TV schedule is to considered purely indicative and is subject to last minute.     AL RAI TV not being able to schedule the booked spots in the defined time period then AL RAI TV will offer the client “make good” spots in the following period, equivalent to the value of the originally booked spots.
+3. Material: The client is responsible to provide AL RAI TV with the advertising material conforming to AL RAI TV technical requirements prior to two days of scheduled broadcasting of the program, failure in which AL RAI TV will not be responsible for the broadcast.
+4. Spots and Material duration: should the delivered material have a net effective duration longer than the duration of the booked spot, then AL RAI TV will invoice the client for the difference, upon the production of the “As Run Log”.
+5. Responsibility of the client: The client will be responsible for the material being broadcasted and is responsible to ensure that the material has been approved for broadcasting, concerning, censorship rules. AL RAI TV is not obliged to broadcast any advertising spot that do not apply with TV’s policy or any material that is deemed to be inappropriate with local rules and society values.
+6. Transferability: The spots acquired by the client from AL RAI TV are not transferable.
+7. Cancellation: If the client cancels the campaign after signing of contract then a 50% charge of the total campaign will be made as compensation] 
+Row  33: 
+Row  34: 
+Row  35: 
+Row  36: 
+Row  37: 
+Row  38: 
+Row  39: 
+Row  40: 
+Row  41: 
+Row  42: [C1=Additional Notes: All show times are tentative.] 
+Row  43: 
+Row  44: 
+Row  45: 
+Row  46: [C1=Number of Spots:] [C27=Package Cost] 
+Row  47: 
+Row  48: [C1=80] [C27=13000] 
+Row  49: 

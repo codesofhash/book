@@ -1,0 +1,553 @@
+{
+  "agency": "Alrai International Marketing & Adv",
+  "advertiser": "Al Qurain Cultural Festival 31",
+  "product": "",
+  "contact_person": "Sara Alromi",
+  "company_name": "National Council",
+  "campaign_period": {
+    "start_date": "2026-01-21",
+    "end_date": "2026-02-05"
+  },
+  "total_spots": 100,
+  "gross_cost": 4950,
+  "spots": [
+    {
+      "programme_name": "Bika Nahya",
+      "programme_start_time": "19:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Masraa",
+      "programme_start_time": "19:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Haq Aldahik",
+      "programme_start_time": "19:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Ahadieth Wa 3ebar",
+      "programme_start_time": "19:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25",
+        "2026-01-25"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Iqtisadiyat Quraniyah",
+      "programme_start_time": "19:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-26"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Mawqif wa Athar",
+      "programme_start_time": "19:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-27"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Rafaa",
+      "programme_start_time": "19:20",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-24",
+        "2026-01-31"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Inside the Box",
+      "programme_start_time": "19:25",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-27"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Masraa",
+      "programme_start_time": "19:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Derwaza",
+      "programme_start_time": "19:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Al Sirdab",
+      "programme_start_time": "19:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Morni",
+      "programme_start_time": "19:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Khair Ahli",
+      "programme_start_time": "19:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-26"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Shako Marko",
+      "programme_start_time": "19:45",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-27"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Sweet is Our Game",
+      "programme_start_time": "20:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Sanadiq Al3omr",
+      "programme_start_time": "20:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Bidoon Tamata",
+      "programme_start_time": "20:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Cash Maa Nabhan",
+      "programme_start_time": "20:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-24",
+        "2026-01-31"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Abla Farah",
+      "programme_start_time": "20:05",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Dar Hanouf",
+      "programme_start_time": "20:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-26"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Al Aounan's Feast",
+      "programme_start_time": "20:15",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-27"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Qad Al Tahada",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Euro Max",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Drive it",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Drewel Maa Kaz",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-24",
+        "2026-01-31"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Bait Al Omar",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Warahom Warahom",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-26"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-In Good Shape",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-27"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "DW-Made In Germany",
+      "programme_start_time": "21:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-28"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Khuda Bibasata",
+      "programme_start_time": "21:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Abla Farah",
+      "programme_start_time": "21:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "With Bu Shuail",
+      "programme_start_time": "21:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Haq Aldahik",
+      "programme_start_time": "21:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-24",
+        "2026-01-31"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Al Sirdab",
+      "programme_start_time": "21:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Maa Bou Shuail",
+      "programme_start_time": "21:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-26"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Sena fi aldeera",
+      "programme_start_time": "21:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-27"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Nabi Salamtek 2",
+      "programme_start_time": "21:40",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-In Good Shape",
+      "programme_start_time": "08:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Made In Germany",
+      "programme_start_time": "08:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Haq Aldahik",
+      "programme_start_time": "08:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Alfa",
+      "programme_start_time": "08:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-24",
+        "2026-01-31"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Drive it",
+      "programme_start_time": "08:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Bait Al Omar",
+      "programme_start_time": "08:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-26"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Mawqif wa Athar",
+      "programme_start_time": "08:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Bika Nahya",
+      "programme_start_time": "08:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Tabib Aldiwanya",
+      "programme_start_time": "08:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Dar Hanouf",
+      "programme_start_time": "08:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-24",
+        "2026-01-31"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Masraa",
+      "programme_start_time": "08:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Ahadieth Wa 3ebar",
+      "programme_start_time": "08:30",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-26"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Inside the Box",
+      "programme_start_time": "09:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Masraa",
+      "programme_start_time": "09:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-22",
+        "2026-01-29"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Euro Max",
+      "programme_start_time": "09:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-23",
+        "2026-01-30"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "DW-Drive it",
+      "programme_start_time": "09:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-24",
+        "2026-01-31"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Derwaza",
+      "programme_start_time": "09:00",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-25"
+      ],
+      "total_spots": 1
+    },
+    {
+      "programme_name": "Shako Marko",
+      "programme_start_time": "09:15",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-21",
+        "2026-01-28"
+      ],
+      "total_spots": 2
+    },
+    {
+      "programme_name": "Alnaalia",
+      "programme_start_time": "09:15",
+      "duration": "30\"",
+      "dates": [
+        "2026-01-27"
+      ],
+      "total_spots": 1
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoComplete Control Documentation</title>
+    <style>
+        :root {
+            --primary-color: #0078D4;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #343a40;
+            --text-color: #212529;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: #fff;
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        header {
+            border-bottom: 1px solid var(--medium-gray);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: var(--dark-gray);
+            font-size: 2.5em;
+            margin-bottom: 0;
+        }
+        header p {
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+        h2, h3 {
+            color: var(--dark-gray);
+            border-bottom: 1px solid var(--medium-gray);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        code {
+            background-color: var(--light-gray);
+            border: 1px solid var(--medium-gray);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: var(--light-gray);
+            border: 1px solid var(--medium-gray);
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        pre code {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        th {
+            background-color: var(--light-gray);
+            font-weight: 600;
+        }
+        .param {
+            font-weight: bold;
+            color: #d73a49;
+        }
+        .type {
+            font-style: italic;
+            color: #6f42c1;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffeeba;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>AutoComplete Control</h1>
+        <p>A self-contained, autocompleting TextBox control for Windows Forms.</p>
+    </header>
+
+    <section id="overview">
+        <h2>Overview</h2>
+        <p>
+            The <code>AutoComplete</code> class is a composite control that provides a standard <code>TextBox</code> with a powerful, integrated suggestion list. It is designed for easy integration into any Windows Forms project to offer a seamless and intuitive autocompletion experience. The class manages its own UI elements and provides a simple event-based mechanism to notify the application of user selections.
+        </p>
+    </section>
+
+    <section id="features">
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>Show on Focus</strong>: Suggestion list appears immediately when control is activated, showing all options without requiring user input.</li>
+            <li><strong>Dynamic Filtering</strong>: Suggestion list updates in real-time as user types, filtering to matching entries.</li>
+            <li><strong>Full Keyboard Support</strong>: Intuitive navigation with arrow keys, <code>Enter</code>, <code>Tab</code>, and <code>Escape</code>.</li>
+            <li><strong>Immediate Commit</strong>: Users can commit a selection with <code>Enter</code> or <code>Tab</code> directly from the text box.</li>
+            <li><strong>Runtime Visibility Control</strong>: The entire control can be shown or hidden dynamically.</li>
+            <li><strong>Self-Contained</strong>: Manages its own <code>TextBox</code> and <code>ListBox</code>, requiring only a parent container, location, and size.</li>
+            <li><strong>Event-Driven</strong>: Notifies the host application of user selections through a dedicated event.</li>
+            <li><strong>Stale Event Prevention</strong>: Uses activation IDs to prevent stale cancel events when rapidly switching between cells.</li>
+        </ul>
+    </section>
+
+    <section id="integration">
+        <h2>Integration Guide</h2>
+        <p>To use the <code>AutoComplete</code> control, follow these steps.</p>
+
+        <h3>1. Invoking the Control</h3>
+        <p>To add the control to your application, instantiate the <code>AutoComplete</code> class within your Form's constructor. You do not need to create a <code>TextBox</code> manually; the class handles it for you.</p>
+        <pre><code>// Define appearance, position, and data for the control
+var suggestions = new List&lt;string&gt; { "Apple", "Banana", "Cherry" };
+Point location = new Point(20, 20);
+int width = 250;
+Font font = new Font("Arial", 10);
+
+// Invoke the AutoComplete control by creating an instance
+AutoComplete autoComplete = new AutoComplete(this, location, width, font, suggestions);</code></pre>
+
+        <h3>2. Handling User Selections</h3>
+        <p>To capture the value when a user makes a selection, subscribe to the <code>ItemSelected</code> event. This is the primary way the control communicates back to your application.</p>
+        
+        <div class="note">
+            <p><strong>What is returned?</strong> The event handler provides two arguments:</p>
+            <ul>
+                <li><code>selectedItem</code> (string): The text of the item the user selected.</li>
+                <li><code>commitKey</code> (Keys): The key the user pressed to make the selection (<code>Keys.Enter</code>, <code>Keys.Tab</code>).</li>
+            </ul>
+        </div>
+
+        <pre><code>// Subscribe to the event to get the returned values
+autoComplete.ItemSelected += (selectedItem, commitKey) =>
+{
+    // Use the returned values in your application logic
+    MessageBox.Show($"Item '{selectedItem}' was selected with the '{commitKey}' key.");
+};</code></pre>
+    </section>
+
+    <section id="api">
+        <h2>API Reference</h2>
+        
+        <h3>Constructor</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>parent</code></td>
+                    <td><code>Control</code></td>
+                    <td>The parent control to host the component (e.g., a <code>Form</code> or <code>Panel</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>location</code></td>
+                    <td><code>Point</code></td>
+                    <td>The top-left position of the text box relative to the parent.</td>
+                </tr>
+                <tr>
+                    <td><code>width</code></td>
+                    <td><code>int</code></td>
+                    <td>The width of the text box. The suggestion list automatically matches this.</td>
+                </tr>
+                <tr>
+                    <td><code>font</code></td>
+                    <td><code>Font</code></td>
+                    <td>The font for the text box and suggestion list.</td>
+                </tr>
+                <tr>
+                    <td><code>suggestions</code></td>
+                    <td><code>List&lt;string&gt;</code></td>
+                    <td>The data source for autocomplete suggestions.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Properties</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Visible</code></td>
+                    <td><code>bool</code></td>
+                    <td>Gets or sets the visibility of the control. Hides both the text box and list.</td>
+                </tr>
+                <tr>
+                    <td><code>TextBox</code></td>
+                    <td><code>TextBox</code></td>
+                    <td>Provides read-only access to the underlying <code>TextBox</code> instance.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Methods</h3>
+        <table>
+             <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Activate()</code></td>
+                    <td>Shows the control, focuses the TextBox, selects all text, and displays all suggestions immediately.</td>
+                </tr>
+                <tr>
+                    <td><code>Hide()</code></td>
+                    <td>Hides both the TextBox and ListBox.</td>
+                </tr>
+                <tr>
+                    <td><code>Clear()</code></td>
+                    <td>Clears the TextBox text and ListBox items, hides the ListBox.</td>
+                </tr>
+                <tr>
+                    <td><code>SetPosition(Point location, int width)</code></td>
+                    <td>Repositions the TextBox and ListBox to a new location with specified width.</td>
+                </tr>
+                <tr>
+                    <td><code>UpdateSuggestions(List&lt;string&gt; newSuggestions)</code></td>
+                    <td>Replaces the existing suggestion list with a new one at runtime.</td>
+                </tr>
+                <tr>
+                    <td><code>Dispose()</code></td>
+                    <td>Removes event handlers and disposes of both controls. Call when done with the AutoComplete.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Events</h3>
+        <table>
+             <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Handler Signature</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>ItemSelected</code></td>
+                    <td><code>void (string selectedItem, Keys commitKey)</code></td>
+                    <td>Fires when a user commits a selection via Enter, Tab, or double-click.</td>
+                </tr>
+                <tr>
+                    <td><code>EditCancelled</code></td>
+                    <td><code>Action</code></td>
+                    <td>Fires when the user presses Escape or focus leaves both controls.</td>
+                </tr>
+                <tr>
+                    <td><code>TextBoxMouseDown</code></td>
+                    <td><code>Action&lt;MouseEventArgs&gt;</code></td>
+                    <td>Fires on TextBox mouse down, allowing parent to handle clicks.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+
+</body>
+</html>
