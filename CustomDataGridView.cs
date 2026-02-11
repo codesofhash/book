@@ -34,7 +34,7 @@ namespace CSharpFlexGrid
             if (string.IsNullOrEmpty(text))
                 return;
 
-            string[] lines = text.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            string[] lines = text.TrimEnd('\r', '\n').Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
             if (this.CurrentCell == null)
                 return;
 

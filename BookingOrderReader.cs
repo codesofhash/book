@@ -193,6 +193,69 @@ namespace CSharpFlexGrid
             if (totalCol == -1) totalCol = sheet.Columns.Count;
 
 
+            // Pre-build a list of resolved dates for each day column to handle multi-month campaigns
+            int currentMonth = month;
+            int currentYear = year;
+            int prevDay = 0;
+            var columnDates = new DateTime?[sheet.Columns.Count];
+
+            for (int c = firstDayCol; c < totalCol; c++)
+            {
+                var cellObj = sheet.Rows[calendarRowIndex][c];
+                var dayHeader = cellObj?.ToString();
+                if (string.IsNullOrWhiteSpace(dayHeader)) continue;
+
+                int day = 0;
+
+                // If Excel stored it as a DateTime, use its month and day directly
+                if (cellObj is DateTime dtVal)
+                {
+                    day = dtVal.Day;
+                    // Trust the month from the DateTime if it looks valid (not the 1899/1900 epoch)
+                    if (dtVal.Year > 1900)
+                    {
+                        columnDates[c] = dtVal;
+                        prevDay = day;
+                        continue;
+                    }
+                }
+                else if (int.TryParse(dayHeader, out day))
+                {
+                    // Day is an integer
+                }
+                else if (DateTime.TryParse(dayHeader, out var dateValue))
+                {
+                    day = dateValue.Day;
+                    if (dateValue.Year > 1900)
+                    {
+                        columnDates[c] = dateValue;
+                        prevDay = day;
+                        continue;
+                    }
+                }
+
+                if (day > 0)
+                {
+                    // Detect month rollover: day number decreased significantly
+                    if (prevDay > 0 && day < prevDay && prevDay > 15)
+                    {
+                        currentMonth++;
+                        if (currentMonth > 12)
+                        {
+                            currentMonth = 1;
+                            currentYear++;
+                        }
+                    }
+                    prevDay = day;
+
+                    try
+                    {
+                        columnDates[c] = new DateTime(currentYear, currentMonth, day);
+                    }
+                    catch { /* Ignore invalid dates */ }
+                }
+            }
+
             for (int r = headerRowIndex + 1; r < sheet.Rows.Count; r++)
             {
                 var programName = sheet.Rows[r][programCol]?.ToString();
@@ -217,52 +280,26 @@ namespace CSharpFlexGrid
 
                 for (int c = firstDayCol; c < totalCol; c++)
                 {
-                    var dayHeader = sheet.Rows[calendarRowIndex][c]?.ToString();
                     var spotMarker = sheet.Rows[r][c]?.ToString();
 
-                    if (!string.IsNullOrWhiteSpace(spotMarker) && !string.IsNullOrWhiteSpace(dayHeader))
+                    if (!string.IsNullOrWhiteSpace(spotMarker) && columnDates[c].HasValue)
                     {
-                        int day = 0;
-                        // Try parsing as integer first
-                        if (int.TryParse(dayHeader, out day))
+                        var date = columnDates[c].Value;
+
+                        // Parse spot marker to get count
+                        int spotCount = 0;
+                        if (int.TryParse(spotMarker, out var parsedCount))
                         {
-                            // Day is already an integer
-                        }
-                        // If not integer, try parsing as DateTime (Excel might read day numbers as dates)
-                        else if (DateTime.TryParse(dayHeader, out var dateValue))
-                        {
-                            // Extract day from DateTime (e.g., "01/01/1900" -> day 1)
-                            day = dateValue.Day;
+                            spotCount = parsedCount;
                         }
 
-                        if (day > 0)
+                        // Add date multiple times based on spot count (skip if 0)
+                        if (spotCount > 0)
                         {
-                            try
+                            for (int i = 0; i < spotCount; i++)
                             {
-                                var date = new DateTime(year, month, day);
-
-                                // Parse spot marker to get count
-                                int spotCount = 0;
-                                if (int.TryParse(spotMarker, out var parsedCount))
-                                {
-                                    spotCount = parsedCount;
-                                }
-                                else
-                                {
-                                    // Non-numeric marker (e.g., "X", "✓") defaults to 0 spot else will count 1 spot in column 1
-                                    spotCount = 0; 
-                                }
-
-                                // Add date multiple times based on spot count (skip if 0)
-                                if (spotCount > 0)
-                                {
-                                    for (int i = 0; i < spotCount; i++)
-                                    {
-                                        spot.Dates.Add(date.ToString("yyyy-MM-dd"));
-                                    }
-                                }
+                                spot.Dates.Add(date.ToString("yyyy-MM-dd"));
                             }
-                            catch { /* Ignore invalid dates */ }
                         }
                     }
                 }
@@ -303,6 +340,55 @@ namespace CSharpFlexGrid
             
             int firstDayCol = priceCol + 1;
 
+            // Pre-build resolved dates for each column to handle multi-month and DateTime cells
+            int currentMonth = month;
+            int currentYear = year;
+            int prevDay = 0;
+            var columnDates = new DateTime?[sheet.Columns.Count];
+
+            for (int c = firstDayCol; c < totalCol; c++)
+            {
+                var cellObj = sheet.Rows[calendarRowIndex][c];
+                var dayHeader = cellObj?.ToString();
+                if (string.IsNullOrWhiteSpace(dayHeader)) continue;
+
+                // If Excel stored it as a DateTime object, use it directly
+                if (cellObj is DateTime dtVal)
+                {
+                    columnDates[c] = dtVal;
+                    prevDay = dtVal.Day;
+                    continue;
+                }
+
+                // Try parsing as full DateTime string
+                if (DateTime.TryParse(dayHeader, out var parsedDate))
+                {
+                    columnDates[c] = parsedDate;
+                    prevDay = parsedDate.Day;
+                    continue;
+                }
+
+                // Fall back to parsing as day number with month rollover detection
+                if (int.TryParse(dayHeader, out int day) && day > 0)
+                {
+                    if (prevDay > 0 && day < prevDay && prevDay > 15)
+                    {
+                        currentMonth++;
+                        if (currentMonth > 12)
+                        {
+                            currentMonth = 1;
+                            currentYear++;
+                        }
+                    }
+                    prevDay = day;
+
+                    try
+                    {
+                        columnDates[c] = new DateTime(currentYear, currentMonth, day);
+                    }
+                    catch { }
+                }
+            }
 
             for (int r = headerRowIndex + 1; r < sheet.Rows.Count; r++)
             {
@@ -328,35 +414,15 @@ namespace CSharpFlexGrid
 
                 for (int c = firstDayCol; c < totalCol; c++)
                 {
-                    var dayHeader = sheet.Rows[calendarRowIndex][c]?.ToString();
                     var spotMarker = sheet.Rows[r][c]?.ToString();
 
-                    if (!string.IsNullOrWhiteSpace(spotMarker) && !string.IsNullOrWhiteSpace(dayHeader))
+                    if (!string.IsNullOrWhiteSpace(spotMarker) && columnDates[c].HasValue)
                     {
-                        DateTime date = DateTime.MinValue;
-                        // Try parsing as full DateTime first (for Direct-NCCAL format with full dates)
-                        if (DateTime.TryParse(dayHeader, out date))
+                        if (int.TryParse(spotMarker, out int spotCount))
                         {
-                            // Use the full date
-                        }
-                        // Fall back to parsing as day number
-                        else if (int.TryParse(dayHeader, out int day))
-                        {
-                            try
+                            for (int i = 0; i < spotCount; i++)
                             {
-                                date = new DateTime(year, month, day);
-                            }
-                            catch { }
-                        }
-
-                        if (date != DateTime.MinValue)
-                        {
-                            if (int.TryParse(spotMarker, out int spotCount))
-                            {
-                                for (int i = 0; i < spotCount; i++)
-                                {
-                                    spot.Dates.Add(date.ToString("yyyy-MM-dd"));
-                                }
+                                spot.Dates.Add(columnDates[c].Value.ToString("yyyy-MM-dd"));
                             }
                         }
                     }

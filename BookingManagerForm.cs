@@ -1638,20 +1638,27 @@ namespace CSharpFlexGrid
                 }
             }
 
+            // Don't intercept copy/paste when editing a cell - let the editing control handle it
+            if (dgvCalendar.IsCurrentCellInEditMode)
+                return;
+
             if (e.Control && e.KeyCode == Keys.C)
             {
                 dgvCalendar.Copy();
                 e.Handled = true;
+                e.SuppressKeyPress = true;
             }
             else if (e.Control && e.KeyCode == Keys.V)
             {
                 PasteToSelectedCells();
                 e.Handled = true;
+                e.SuppressKeyPress = true;
             }
             else if (e.KeyCode == Keys.Delete)
             {
                 DeleteSelectedCells();
                 e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
 
@@ -1966,6 +1973,9 @@ namespace CSharpFlexGrid
             if (dgvCalendar.CurrentCell == null || calendarDataTable == null)
                 return;
 
+            // Cancel any active cell edit to prevent the current cell from overriding pasted values
+            dgvCalendar.CancelEdit();
+
             string clipboardText = Clipboard.GetText();
             if (string.IsNullOrEmpty(clipboardText))
                 return;
@@ -1980,7 +1990,8 @@ namespace CSharpFlexGrid
                 return;
             }
 
-            string[] rows = clipboardText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            // Split on \r\n or \n (preserve empty rows so blanks paste as-is)
+            string[] rows = clipboardText.TrimEnd('\r', '\n').Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
             isUpdating = true;
             dgvCalendar.SuspendLayout();
@@ -1994,6 +2005,8 @@ namespace CSharpFlexGrid
                         break;
 
                     string[] cells = rows[i].Split('\t');
+                    DataRow dataRow = calendarDataTable.Rows[currentRow];
+
                     for (int j = 0; j < cells.Length; j++)
                     {
                         int currentCol = startCol + j;
@@ -2005,7 +2018,29 @@ namespace CSharpFlexGrid
                         {
                             try
                             {
-                                dgvCalendar[currentCol, currentRow].Value = cells[j];
+                                // For ComboBox columns, ensure the value is in the items list before setting
+                                if (column is DataGridViewComboBoxColumn comboCol)
+                                {
+                                    string val = cells[j];
+                                    if (!string.IsNullOrEmpty(val) && !comboCol.Items.Contains(val))
+                                    {
+                                        comboCol.Items.Add(val);
+                                    }
+                                }
+
+                                // Write directly to the DataTable to bypass DataGridView current-cell issues
+                                string colName = column.DataPropertyName;
+                                if (string.IsNullOrEmpty(colName)) colName = column.Name;
+                                Type colType = calendarDataTable.Columns[colName].DataType;
+
+                                if (colType == typeof(int))
+                                {
+                                    dataRow[colName] = int.TryParse(cells[j], out int intVal) ? intVal : 0;
+                                }
+                                else
+                                {
+                                    dataRow[colName] = cells[j];
+                                }
                             }
                             catch { }
                         }
@@ -2017,6 +2052,8 @@ namespace CSharpFlexGrid
                 isUpdating = false;
                 dgvCalendar.ResumeLayout();
             }
+
+            dgvCalendar.Refresh();
 
             for (int i = 0; i < rows.Length; i++)
             {
@@ -2824,17 +2861,18 @@ namespace CSharpFlexGrid
             // Group spots by program name and time
             if (currentBookingOrder.Spots != null && currentBookingOrder.Spots.Count > 0)
             {
+                // Preserve original Excel row order (group duplicates but keep first-occurrence order)
                 var spotGroups = currentBookingOrder.Spots
-                    .GroupBy(s => new { s.ProgrammeName, s.ProgrammeStartTime })
-                    .OrderBy(g => g.Key.ProgrammeName)
-                    .ThenBy(g => g.Key.ProgrammeStartTime);
+                    .Select((s, index) => new { Spot = s, Index = index })
+                    .GroupBy(x => new { x.Spot.ProgrammeName, x.Spot.ProgrammeStartTime })
+                    .OrderBy(g => g.Min(x => x.Index));
 
                 foreach (var group in spotGroups)
                 {
                     DataRow row = calendarDataTable.NewRow();
 
                     // Get duration from the first spot in the group
-                    var firstSpot = group.First();
+                    var firstSpot = group.First().Spot;
 
                     row["OID"] = "";
                     row["Time"] = group.Key.ProgrammeStartTime ?? "";
@@ -2851,7 +2889,7 @@ namespace CSharpFlexGrid
                     row["Unit Price KWD"] = "";
                     row["Price in US $"] = "";
 
-                    var allDatesForGroup = group.SelectMany(s => s.Dates).ToList();
+                    var allDatesForGroup = group.SelectMany(x => x.Spot.Dates).ToList();
                     var dateCounts = allDatesForGroup
                         .GroupBy(d => d)
                         .ToDictionary(g => DateTime.Parse(g.Key), g => g.Count());

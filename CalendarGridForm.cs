@@ -133,11 +133,11 @@ namespace CSharpFlexGrid
             // Add Total Spots column
             calendarDataTable.Columns.Add("Total Spots", typeof(int));
 
-            // Group spots by program name and time
+            // Group spots by program name and time (preserve original Excel row order)
             var spotGroups = bookingOrder.Spots
-                .GroupBy(s => new { s.ProgrammeName, s.ProgrammeStartTime })
-                .OrderBy(g => g.Key.ProgrammeName)
-                .ThenBy(g => g.Key.ProgrammeStartTime);
+                .Select((s, index) => new { Spot = s, Index = index })
+                .GroupBy(x => new { x.Spot.ProgrammeName, x.Spot.ProgrammeStartTime })
+                .OrderBy(g => g.Min(x => x.Index));
 
             int spotIndex = 0;
             foreach (var group in spotGroups)
@@ -159,7 +159,7 @@ namespace CSharpFlexGrid
                 row["Spot Index"] = spotIndex++;
 
                 // Count spots per date for this program/time combination
-                var allDatesForGroup = group.SelectMany(s => s.Dates).ToList();
+                var allDatesForGroup = group.SelectMany(x => x.Spot.Dates).ToList();
                 var dateCounts = allDatesForGroup
                     .GroupBy(d => d)
                     .ToDictionary(g => DateTime.Parse(g.Key), g => g.Count());
@@ -536,20 +536,27 @@ namespace CSharpFlexGrid
 
         private void DgvCalendar_KeyDown(object sender, KeyEventArgs e)
         {
+            // Don't intercept copy/paste when editing a cell - let the editing control handle it
+            if (dgvCalendar.IsCurrentCellInEditMode)
+                return;
+
             if (e.Control && e.KeyCode == Keys.C)
             {
                 dgvCalendar.Copy();
                 e.Handled = true;
+                e.SuppressKeyPress = true;
             }
             else if (e.Control && e.KeyCode == Keys.V)
             {
                 PasteToSelectedCells();
                 e.Handled = true;
+                e.SuppressKeyPress = true;
             }
             else if (e.KeyCode == Keys.Delete)
             {
                 DeleteSelectedCells();
                 e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
 
@@ -654,6 +661,9 @@ namespace CSharpFlexGrid
             if (dgvCalendar.CurrentCell == null)
                 return;
 
+            // Cancel any active cell edit to prevent the current cell from overriding pasted values
+            dgvCalendar.CancelEdit();
+
             string clipboardText = Clipboard.GetText();
             if (string.IsNullOrEmpty(clipboardText))
                 return;
@@ -669,7 +679,8 @@ namespace CSharpFlexGrid
                 return;
             }
 
-            string[] rows = clipboardText.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            // Split on \r\n or \n (preserve empty rows so blanks paste as-is)
+            string[] rows = clipboardText.TrimEnd('\r', '\n').Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
             // Suspend events and layout during bulk update
             isUpdating = true;
@@ -684,6 +695,8 @@ namespace CSharpFlexGrid
                         break;
 
                     string[] cells = rows[i].Split('\t');
+                    DataRow dataRow = calendarDataTable.Rows[currentRow];
+
                     for (int j = 0; j < cells.Length; j++)
                     {
                         int currentCol = startCol + j;
@@ -695,7 +708,29 @@ namespace CSharpFlexGrid
                         {
                             try
                             {
-                                dgvCalendar[currentCol, currentRow].Value = cells[j];
+                                // For ComboBox columns, ensure the value is in the items list before setting
+                                if (column is DataGridViewComboBoxColumn comboCol)
+                                {
+                                    string val = cells[j];
+                                    if (!string.IsNullOrEmpty(val) && !comboCol.Items.Contains(val))
+                                    {
+                                        comboCol.Items.Add(val);
+                                    }
+                                }
+
+                                // Write directly to the DataTable to bypass DataGridView current-cell issues
+                                string colName = column.DataPropertyName;
+                                if (string.IsNullOrEmpty(colName)) colName = column.Name;
+                                Type colType = calendarDataTable.Columns[colName].DataType;
+
+                                if (colType == typeof(int))
+                                {
+                                    dataRow[colName] = int.TryParse(cells[j], out int intVal) ? intVal : 0;
+                                }
+                                else
+                                {
+                                    dataRow[colName] = cells[j];
+                                }
                             }
                             catch { }
                         }
@@ -707,6 +742,8 @@ namespace CSharpFlexGrid
                 isUpdating = false;
                 dgvCalendar.ResumeLayout();
             }
+
+            dgvCalendar.Refresh();
 
             // Recalculate totals once at the end
             for (int i = 0; i < rows.Length; i++)
