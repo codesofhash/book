@@ -1,37 +1,37 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\",
+  "WorkspaceRootPath": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\bookingmanagerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\bookingmanagerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:bookingmanagerform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\calendargridform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\calendargridform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:calendargridform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\dataeditorform.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\dataeditorform.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:dataeditorform.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\bookingmanagerform.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\bookingmanagerform.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:bookingmanagerform.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\autocomplete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\autocomplete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:autocomplete.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\projectreport.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\projectreport.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:projectreport.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\dataeditorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\dataeditorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:dataeditorform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c# workshop\\csharpflexgrid\\editableautocompletecombobox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|c:\\users\\hashi\\desktop\\book\\c#workshop\\csharpflexgrid\\editableautocompletecombobox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D63544C3-912A-9B6F-06D3-BE102FEC1D69}|CSharpFlexGrid.csproj|solutionrelative:editableautocompletecombobox.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -48,9 +48,9 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "DataEditorForm.resx",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\DataEditorForm.resx",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\DataEditorForm.resx",
               "RelativeDocumentMoniker": "DataEditorForm.resx",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\DataEditorForm.resx",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\DataEditorForm.resx",
               "RelativeToolTip": "DataEditorForm.resx",
               "ViewState": "AgIAACsAAAAAAAAAAAAAACsAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
@@ -60,9 +60,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "BookingManagerForm.resx",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\BookingManagerForm.resx",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\BookingManagerForm.resx",
               "RelativeDocumentMoniker": "BookingManagerForm.resx",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\BookingManagerForm.resx",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\BookingManagerForm.resx",
               "RelativeToolTip": "BookingManagerForm.resx",
               "ViewState": "AgIAACsAAAAAAAAAAAAAACsAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
@@ -72,9 +72,9 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "AutoComplete.cs",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\AutoComplete.cs",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\AutoComplete.cs",
               "RelativeDocumentMoniker": "AutoComplete.cs",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\AutoComplete.cs",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\AutoComplete.cs",
               "RelativeToolTip": "AutoComplete.cs",
               "ViewState": "AgIAAEQAAAAAAAAAAAAAAEQAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -84,9 +84,9 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "CalendarGridForm.cs",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\CalendarGridForm.cs",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CalendarGridForm.cs",
               "RelativeDocumentMoniker": "CalendarGridForm.cs",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\CalendarGridForm.cs",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CalendarGridForm.cs",
               "RelativeToolTip": "CalendarGridForm.cs",
               "ViewState": "AgIAAIkBAAAAAAAAAADgv4wBAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -96,11 +96,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "BookingManagerForm.cs",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\BookingManagerForm.cs",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\BookingManagerForm.cs",
               "RelativeDocumentMoniker": "BookingManagerForm.cs",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\BookingManagerForm.cs",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\BookingManagerForm.cs",
               "RelativeToolTip": "BookingManagerForm.cs",
-              "ViewState": "AgIAALUMAAAAAAAAAAAjwNoMAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB8KAAAAAAAAAAAWwDEKAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-28T09:05:22.332Z",
               "EditorCaption": ""
@@ -109,9 +109,9 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "EditableAutoCompleteComboBox.cs",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\EditableAutoCompleteComboBox.cs",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\EditableAutoCompleteComboBox.cs",
               "RelativeDocumentMoniker": "EditableAutoCompleteComboBox.cs",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\EditableAutoCompleteComboBox.cs",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\EditableAutoCompleteComboBox.cs",
               "RelativeToolTip": "EditableAutoCompleteComboBox.cs",
               "ViewState": "AgIAAFYAAAAAAAAAAAAWwGcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -121,9 +121,9 @@
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "DataEditorForm.cs",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\DataEditorForm.cs",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\DataEditorForm.cs",
               "RelativeDocumentMoniker": "DataEditorForm.cs",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\DataEditorForm.cs",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\DataEditorForm.cs",
               "RelativeToolTip": "DataEditorForm.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAD4vzIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -133,9 +133,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "ProjectReport.html",
-              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\ProjectReport.html",
+              "DocumentMoniker": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\ProjectReport.html",
               "RelativeDocumentMoniker": "ProjectReport.html",
-              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\ProjectReport.html",
+              "ToolTip": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\ProjectReport.html",
               "RelativeToolTip": "ProjectReport.html",
               "ViewState": "AgIAAMMDAAAAAAAAAAAvwNYDAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",

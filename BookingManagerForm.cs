@@ -2615,7 +2615,9 @@ namespace CSharpFlexGrid
                     return;
                 }
 
-                currentJsonFilePath = filePath;
+                // Save to configured output path, not the source file location
+                string fileName = Path.GetFileName(filePath);
+                currentJsonFilePath = Path.Combine(jsonOutputPath, fileName);
                 LoadBookingOrderToForm();
                 LoadCalendarData();
             }
@@ -2627,6 +2629,21 @@ namespace CSharpFlexGrid
             finally
             {
                 Cursor = Cursors.Default;
+            }
+        }
+
+        private void btnImportJSON_Click(object sender, EventArgs e)
+        {
+            using (var importForm = new JsonImportForm())
+            {
+                if (importForm.ShowDialog() == DialogResult.OK)
+                {
+                    currentBookingOrder = importForm.Result;
+                    string fileName = $"{currentBookingOrder.Agency}_{currentBookingOrder.Product}_{DateTime.Now:yyyyMMdd_HHmmss}.json";
+                    currentJsonFilePath = Path.Combine(jsonOutputPath, fileName);
+                    LoadBookingOrderToForm();
+                    LoadCalendarData();
+                }
             }
         }
 

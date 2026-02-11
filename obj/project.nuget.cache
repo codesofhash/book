@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+XWiEmJoN2g=",
+  "dgSpecHash": "qZPjiKeIBnQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
+  "projectFilePath": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hashi\\.nuget\\packages\\dotnetenv\\3.1.1\\dotnetenv.3.1.1.nupkg.sha512",
     "C:\\Users\\hashi\\.nuget\\packages\\exceldatareader\\3.6.0\\exceldatareader.3.6.0.nupkg.sha512",
@@ -90,5 +90,15 @@
     "C:\\Users\\hashi\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\hashi\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json.",
+      "projectPath": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
+      "targetGraphs": []
+    }
+  ]
 }

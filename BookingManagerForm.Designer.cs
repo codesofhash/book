@@ -25,6 +25,7 @@ namespace CSharpFlexGrid
         private System.Windows.Forms.Button btnCreateNew;
         private System.Windows.Forms.Button btnUploadCSV;
         private System.Windows.Forms.Button btnEditBooking;
+        private System.Windows.Forms.Button btnImportJSON;
         private System.Windows.Forms.Button btnBack;
         private CSharpFlexGrid.CustomDataGridView dgvCalendar;
         private System.Windows.Forms.Label lblRecordCount;
@@ -60,6 +61,7 @@ namespace CSharpFlexGrid
             this.lblPackageCostLabel = new System.Windows.Forms.Label();
             this.txtPackageCost = new System.Windows.Forms.TextBox();
             this.panelActions = new System.Windows.Forms.Panel();
+            this.btnImportJSON = new System.Windows.Forms.Button();
             this.btnEditBooking = new System.Windows.Forms.Button();
             this.btnUploadCSV = new System.Windows.Forms.Button();
             this.btnCreateNew = new System.Windows.Forms.Button();
@@ -262,6 +264,7 @@ namespace CSharpFlexGrid
             // panelActions
             //
             this.panelActions.BackColor = System.Drawing.Color.White;
+            this.panelActions.Controls.Add(this.btnImportJSON);
             this.panelActions.Controls.Add(this.btnEditBooking);
             this.panelActions.Controls.Add(this.btnUploadCSV);
             this.panelActions.Controls.Add(this.btnCreateNew);
@@ -272,6 +275,20 @@ namespace CSharpFlexGrid
             this.panelActions.Padding = new System.Windows.Forms.Padding(20, 10, 20, 10);
             this.panelActions.Size = new System.Drawing.Size(1400, 70);
             this.panelActions.TabIndex = 2;
+            //
+            // btnImportJSON
+            //
+            this.btnImportJSON.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(0)))));
+            this.btnImportJSON.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImportJSON.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnImportJSON.ForeColor = System.Drawing.Color.White;
+            this.btnImportJSON.Location = new System.Drawing.Point(959, 15);
+            this.btnImportJSON.Name = "btnImportJSON";
+            this.btnImportJSON.Size = new System.Drawing.Size(220, 40);
+            this.btnImportJSON.TabIndex = 4;
+            this.btnImportJSON.Text = "Import JSON";
+            this.btnImportJSON.UseVisualStyleBackColor = false;
+            this.btnImportJSON.Click += new System.EventHandler(this.btnImportJSON_Click);
             //
             // btnEditBooking
             //

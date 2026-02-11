@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj": {}
+    "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj": {
+    "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
+        "projectUniqueName": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
         "projectName": "CSharpFlexGrid",
-        "projectPath": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
+        "projectPath": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\CSharpFlexGrid.csproj",
         "packagesPath": "C:\\Users\\hashi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hashi\\Desktop\\book\\C# workshop\\CSharpFlexGrid\\obj\\",
+        "outputPath": "C:\\Users\\hashi\\Desktop\\book\\C#workshop\\CSharpFlexGrid\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
