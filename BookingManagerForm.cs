@@ -4145,6 +4145,28 @@ namespace CSharpFlexGrid
                     ? (dgvCalendar["Sales Type", rowIndex].Value?.ToString() ?? "NA")
                     : "NA";
 
+                // Get F/P value for Payment column
+                string fpValue = dgvCalendar.Columns.Contains("F/P")
+                    ? (dgvCalendar["F/P", rowIndex].Value?.ToString() ?? "")
+                    : "";
+
+                // Get ORD value for OrderinBreak column
+                string ordValue = dgvCalendar.Columns.Contains("ORD")
+                    ? (dgvCalendar["ORD", rowIndex].Value?.ToString() ?? "")
+                    : "";
+                int orderInBreak = int.TryParse(ordValue, out int oib) ? oib : 0;
+
+                // Get nullable columns: OID, Ratio, SalesType, SponsorType
+                string oidValue = dgvCalendar.Columns.Contains("OID")
+                    ? (dgvCalendar["OID", rowIndex].Value?.ToString() ?? "")
+                    : "";
+                string ratioValue = dgvCalendar.Columns.Contains("Ratio")
+                    ? (dgvCalendar["Ratio", rowIndex].Value?.ToString() ?? "")
+                    : "";
+                string sponsorType = dgvCalendar.Columns.Contains("Sponsor Type")
+                    ? (dgvCalendar["Sponsor Type", rowIndex].Value?.ToString() ?? "")
+                    : "";
+
                 // Get Unit Price KWD for this row
                 decimal unitPrice = 0;
                 if (dgvCalendar.Columns.Contains("Unit Price KWD"))
@@ -4176,16 +4198,28 @@ namespace CSharpFlexGrid
                         string transDate = date.ToString("yyyy-MM-dd");
                         string dayName = date.ToString("ddd");
 
+                        // Build nullable column fragments
+                        string oidColumn = !string.IsNullOrWhiteSpace(oidValue) ? ", OID" : "";
+                        string oidVal = !string.IsNullOrWhiteSpace(oidValue) ? $", '{oidValue.Replace("'", "''")}'" : "";
+                        string ratioColumn = !string.IsNullOrWhiteSpace(ratioValue) ? ", Ratio" : "";
+                        string ratioVal = !string.IsNullOrWhiteSpace(ratioValue) ? $", '{ratioValue.Replace("'", "''")}'" : "";
+                        string salesTypeColumn = !string.IsNullOrWhiteSpace(salesType) && salesType != "NA" ? ", SalesType" : "";
+                        string salesTypeVal = !string.IsNullOrWhiteSpace(salesType) && salesType != "NA" ? $", '{salesType.Replace("'", "''")}'" : "";
+                        string sponsorTypeColumn = !string.IsNullOrWhiteSpace(sponsorType) ? ", SponsorType" : "";
+                        string sponsorTypeVal = !string.IsNullOrWhiteSpace(sponsorType) ? $", '{sponsorType.Replace("'", "''")}'" : "";
+
                         string spotQuery = $@"INSERT INTO u333577897_dbofhash.spot_book
                             (Rai, Booking_Status, Control, BR_No, PGRA, PrgNm, Payment, Price, PrgStartTime, SpotTime,
                              BR_Type, REV_Type, BreakNo, OrderinBreak, SponsorOrder, NoofSpots, TransDate, Day,
-                             ProductType, Product, Version, Agency, Advertiser, AdvDur, ClipID, ord, schedule)
+                             ProductType, Product, Version, Agency, Advertiser, AdvDur, ClipID, ord, schedule
+                             {oidColumn}{ratioColumn}{salesTypeColumn}{sponsorTypeColumn})
                             VALUES
-                            (0, 'OK', 'NA', 0, 'NA', '{programme.Replace("'", "''")}', 'NA',
+                            (0, 'OK', 'NA', 0, 'NA', '{programme.Replace("'", "''")}', '{fpValue.Replace("'", "''")}',
                              {unitPrice.ToString("0.000", CultureInfo.InvariantCulture)}, '{time}', 'NA',
-                             '{salesType.Replace("'", "''")}', 'NA', 0, 0, 'NA', 1, '{transDate}', '{dayName}',
+                             '{salesType.Replace("'", "''")}', 'NA', 0, {orderInBreak}, 'NA', 1, '{transDate}', '{dayName}',
                              'NA', '{product.Replace("'", "''")}', '', '{agency.Replace("'", "''")}',
-                             '{advertiser.Replace("'", "''")}', {rowDuration}, 'NA', {ord}, {schedule})";
+                             '{advertiser.Replace("'", "''")}', {rowDuration}, 'NA', {ord}, {schedule}
+                             {oidVal}{ratioVal}{salesTypeVal}{sponsorTypeVal})";
 
                         db.ExecuteNonQuery(spotQuery);
                     }

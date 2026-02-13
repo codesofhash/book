@@ -1155,8 +1155,9 @@
                     <tr><th>Table</th><th>Purpose</th><th>Key Columns</th></tr>
                     <tr><td>grid</td><td>Main scheduling grid</td><td>tagid, ordinday, trans_dt, start_at</td></tr>
                     <tr><td>prog_details</td><td>Program information</td><td>idprog_details, name_en, payment_ratio</td></tr>
-                    <tr><td>bookingdetails</td><td>Booking metadata (agencies, advertisers)</td><td>agency, advertiser</td></tr>
-                    <tr><td>bookingdetails2</td><td>Additional booking details (products)</td><td>product</td></tr>
+                    <tr><td>bookingdetails</td><td>Deal header (one row per deal)</td><td>id, agency, advertiser, c_start, c_end, created</td></tr>
+                    <tr><td>bookingdetails2</td><td>Booking lines (one row per duration+period group)</td><td>deal, vehicle, ord, schedule, d_start, d_end, spots, dur, space, product, salesPeriod, netGross, netAmount</td></tr>
+                    <tr><td>spot_book</td><td>Individual spots (one row per spot per date per grid row)</td><td>PrgNm, Payment, Price, PrgStartTime, TransDate, Day, Product, Agency, Advertiser, AdvDur, OID, Ratio, SalesType, SponsorType, ord, schedule</td></tr>
                     <tr><td>rate_card</td><td>Duration-based rate multipliers</td><td>dur, ratio</td></tr>
                     <tr><td>currency_rate</td><td>Campaign periods</td><td>id, period, start_date, end_date</td></tr>
                 </table>
@@ -1280,9 +1281,95 @@ Triggers: Package cost Leave, F/P change, Ratio change, Duration change, Total s
                     <li>Validate all Dur cells contain integers (0-215)</li>
                     <li>Validate Advertiser field is not empty</li>
                     <li>Get campaign periods from currency_rate table overlapping campaign dates</li>
-                    <li>Group bookings by Duration and Period</li>
-                    <li>Display grouped bookings table in MessageBox or dialog</li>
+                    <li>Group bookings by Duration and Period (spots aggregated per duration+period combination)</li>
+                    <li>Display grouped bookings table in dialog</li>
+                    <li>Check for existing deals (by advertiser + overlapping date range &plusmn; dealSearchDays)</li>
+                    <li>Create new deal or add to existing deal</li>
+                    <li>Insert bookings into bookingdetails2 and spot_book tables</li>
+                    <li>Show booking report</li>
                 </ol>
+
+                <h4>9.5.1 Database Field Mapping — bookingdetails (Deal Header)</h4>
+                <p>One row per deal. Created by <code class="inline-code">CreateNewDeal()</code>.</p>
+                <table>
+                    <tr><th>DB Column</th><th>Source</th><th>Description</th></tr>
+                    <tr><td>agency</td><td>cmbAgency.Text</td><td>Form combo box</td></tr>
+                    <tr><td>advertiser</td><td>cmbAdvertiser.Text</td><td>Form combo box</td></tr>
+                    <tr><td>c_start</td><td>dtpCampaignStart.Value</td><td>Campaign start date picker</td></tr>
+                    <tr><td>c_end</td><td>dtpCampaignEnd.Value</td><td>Campaign end date picker</td></tr>
+                    <tr><td>created</td><td>DateTime.Now</td><td>Auto-generated timestamp</td></tr>
+                </table>
+
+                <h4>9.5.2 Database Field Mapping — bookingdetails2 (Booking Lines)</h4>
+                <p>One row per duration+period group. Created by <code class="inline-code">InsertBookings()</code>.</p>
+                <table>
+                    <tr><th>DB Column</th><th>Source</th><th>Description</th></tr>
+                    <tr><td>deal</td><td>dealNumber (FK)</td><td>From bookingdetails insert ID</td></tr>
+                    <tr><td>vehicle</td><td>Hardcoded</td><td>"Alrai TV"</td></tr>
+                    <tr><td>ord / agencyorder</td><td>GetNextOrdAndSchedule()</td><td>Auto-incremented</td></tr>
+                    <tr><td>schedule / agencyschedule</td><td>GetNextOrdAndSchedule()</td><td>Auto-incremented</td></tr>
+                    <tr><td>market</td><td>Hardcoded</td><td>"KUWAIT"</td></tr>
+                    <tr><td>type</td><td>Hardcoded</td><td>"COMMERCIAL"</td></tr>
+                    <tr><td>d_start</td><td>booking.ActualStartDate</td><td>Earliest date with spots in this group</td></tr>
+                    <tr><td>d_end</td><td>booking.ActualEndDate</td><td>Latest date with spots in this group</td></tr>
+                    <tr><td>year</td><td>ActualStartDate.Year</td><td>Derived (e.g. "2026")</td></tr>
+                    <tr><td>month</td><td>ActualStartDate.Month</td><td>Derived (e.g. "Jan")</td></tr>
+                    <tr><td>salesPeriod</td><td>booking.PeriodName</td><td>From currency_rate table lookup</td></tr>
+                    <tr><td>s_ref</td><td>Hardcoded</td><td>"SALES TEAM"</td></tr>
+                    <tr><td>product</td><td>cmbProduct.Text</td><td>Form combo box</td></tr>
+                    <tr><td>ptype</td><td>Hardcoded</td><td>"NA"</td></tr>
+                    <tr><td>status</td><td>Hardcoded</td><td>"OK"</td></tr>
+                    <tr><td>spots</td><td>booking.TotalSpots</td><td>Sum of grid date cells for this duration+period</td></tr>
+                    <tr><td>dur</td><td>booking.Duration</td><td>Grid Dur column</td></tr>
+                    <tr><td>space</td><td>dur &times; spots</td><td>Calculated total space</td></tr>
+                    <tr><td>currency</td><td>Hardcoded</td><td>"KWD"</td></tr>
+                    <tr><td>paymentType</td><td>Hardcoded</td><td>"CREDIT"</td></tr>
+                    <tr><td>netGross</td><td>Unit Price KWD &times; spots</td><td>Calculated total amount</td></tr>
+                    <tr><td>discount</td><td>Hardcoded</td><td>"0"</td></tr>
+                    <tr><td>netAmount</td><td>Same as netGross</td><td>Calculated (no discount applied)</td></tr>
+                    <tr><td>avr</td><td>Hardcoded</td><td>1</td></tr>
+                    <tr><td>file / remark</td><td>Hardcoded</td><td>Empty string</td></tr>
+                </table>
+
+                <h4>9.5.3 Database Field Mapping — spot_book (Individual Spots)</h4>
+                <p>One row per spot per date per matching grid row. Created by <code class="inline-code">InsertSpotsForBooking()</code>.</p>
+                <table>
+                    <tr><th>DB Column</th><th>Grid Column / Source</th><th>Description</th></tr>
+                    <tr><td>Rai</td><td>Hardcoded: 0</td><td></td></tr>
+                    <tr><td>Booking_Status</td><td>Hardcoded: "OK"</td><td></td></tr>
+                    <tr><td>Control</td><td>Hardcoded: "NA"</td><td></td></tr>
+                    <tr><td>BR_No</td><td>Hardcoded: 0</td><td></td></tr>
+                    <tr><td>PGRA</td><td>Hardcoded: "NA"</td><td></td></tr>
+                    <tr><td>PrgNm</td><td>Grid: <strong>Programme</strong></td><td>Programme name per row</td></tr>
+                    <tr><td>Payment</td><td>Grid: <strong>F/P</strong></td><td>Payment type factor from grid</td></tr>
+                    <tr><td>Price</td><td>Grid: <strong>Unit Price KWD</strong></td><td>Calculated unit price per row</td></tr>
+                    <tr><td>PrgStartTime</td><td>Grid: <strong>Time</strong></td><td>Programme start time per row</td></tr>
+                    <tr><td>SpotTime</td><td>Hardcoded: "NA"</td><td></td></tr>
+                    <tr><td>BR_Type</td><td>Grid: <strong>Sales Type</strong></td><td>Sales type per row (or "NA")</td></tr>
+                    <tr><td>REV_Type</td><td>Hardcoded: "NA"</td><td></td></tr>
+                    <tr><td>BreakNo</td><td>Hardcoded: 0</td><td></td></tr>
+                    <tr><td>OrderinBreak</td><td>Grid: <strong>ORD</strong></td><td>Order in break from grid (parsed as int, default 0)</td></tr>
+                    <tr><td>SponsorOrder</td><td>Hardcoded: "NA"</td><td></td></tr>
+                    <tr><td>NoofSpots</td><td>Hardcoded: 1</td><td>One DB row per spot instance</td></tr>
+                    <tr><td>TransDate</td><td>Date column in grid</td><td>The specific date (yyyy-MM-dd)</td></tr>
+                    <tr><td>Day</td><td>Derived from date</td><td>Day name (e.g. "Mon", "Tue")</td></tr>
+                    <tr><td>ProductType</td><td>Hardcoded: "NA"</td><td></td></tr>
+                    <tr><td>Product</td><td>cmbProduct.Text</td><td>Form combo box</td></tr>
+                    <tr><td>Version</td><td>Hardcoded: ""</td><td>Empty string</td></tr>
+                    <tr><td>Agency</td><td>cmbAgency.Text</td><td>Form combo box</td></tr>
+                    <tr><td>Advertiser</td><td>cmbAdvertiser.Text</td><td>Form combo box</td></tr>
+                    <tr><td>AdvDur</td><td>Grid: <strong>Dur</strong></td><td>Duration in seconds per row</td></tr>
+                    <tr><td>ClipID</td><td>Hardcoded: "NA"</td><td></td></tr>
+                    <tr><td>ord</td><td>Auto-incremented</td><td>From parent booking group</td></tr>
+                    <tr><td>schedule</td><td>Auto-incremented</td><td>From parent booking group</td></tr>
+                    <tr><td>OID</td><td>Grid: <strong>OID</strong></td><td>Nullable — only inserted if grid has value</td></tr>
+                    <tr><td>Ratio</td><td>Grid: <strong>Ratio</strong></td><td>Nullable — only inserted if grid has value</td></tr>
+                    <tr><td>SalesType</td><td>Grid: <strong>Sales Type</strong></td><td>Nullable — only inserted if grid has non-"NA" value</td></tr>
+                    <tr><td>SponsorType</td><td>Grid: <strong>Sponsor Type</strong></td><td>Nullable — only inserted if grid has value</td></tr>
+                </table>
+
+                <h4>9.5.4 Grouping Logic</h4>
+                <p>Grid data is grouped by <strong>Duration + Sales Period</strong> before insertion into bookingdetails2. Periods come from the <code class="inline-code">currency_rate</code> table. Each date cell in the grid is matched to a period, and spots are aggregated per (duration, period) combination. The <code class="inline-code">GroupBookingsByDurationAndPeriod()</code> method iterates every date column × every grid row, summing spots and amounts into groups.</p>
             </div>
 
             <div id="feature-sorting" class="new-feature">
